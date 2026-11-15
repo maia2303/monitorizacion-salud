@@ -2,7 +2,7 @@
 import express from 'express';
 import db from './config/db.js';
 import cors from 'cors';
-
+import criRoutes from './modules/cri/criRoutes.js';
 
 import panasRoutes from './modules/panas/panasRoutes.js';
 import suenoRoutes from './modules/sueno/suenoRoutes.js';
@@ -12,12 +12,12 @@ const app = express();
 app.use(cors({ origin: 'http://localhost:5173' }));
 app.use(express.json());
 
-app.use(express.json());
 
 // Rutas de los test
 app.use('/api/panas', panasRoutes);
 app.use('/api/sueno', suenoRoutes);
 app.use('/api/bitacoras', bitacorasRoutes);
+app.use('/api/cri', criRoutes);
 
 // Verificar servidor
 app.get('/api/health', (req, res) => {

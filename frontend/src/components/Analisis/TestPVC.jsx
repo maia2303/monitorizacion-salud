@@ -13,8 +13,8 @@ export default function TestPVC({ perfilActivo = 'grace', onVolver, onCambiarPes
   const [alertaSobrecarga, setAlertaSobrecarga] = useState(false);
 
   const astronauta = perfilActivo === 'grace'
-    ? { nombre: 'Grace K. Wilson', rango: 'Comandante', avatar: <GraceAvatar className="w-12 h-12" /> }
-    : { nombre: 'Rocky C. Mendoza', rango: 'Piloto', avatar: <RockyAvatar className="w-12 h-12" /> };
+    ? { nombre: 'Grace K. Wilson', rango: 'Commander', avatar: <GraceAvatar className="w-12 h-12" /> }
+    : { nombre: 'Rocky C. Mendoza', rango: 'Pilot', avatar: <RockyAvatar className="w-12 h-12" /> };
 
   const recalibrar = () => {
     setCalibrado(false);
@@ -30,12 +30,12 @@ export default function TestPVC({ perfilActivo = 'grace', onVolver, onCambiarPes
       <header className="px-6 sm:px-10 py-5 border-b border-slate-800/80 flex flex-wrap items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 text-xs md:text-sm font-mono tracking-wider">
-            <span className="font-bold text-slate-200">ROVER LUNAR</span>
+            <span className="font-bold text-slate-200">LUNAR ROVER</span>
             <span className="text-cyan-400 font-bold mx-1">//</span>
-            <span className="text-slate-300 font-normal">DÍA 42</span>
+            <span className="text-slate-300 font-normal">MISSION DAY 42</span>
           </div>
           <div className="text-xs text-slate-400 mt-1">
-            {astronauta.nombre} · Tripulación A
+            {astronauta.nombre} · Crew A
           </div>
         </div>
 
@@ -45,7 +45,7 @@ export default function TestPVC({ perfilActivo = 'grace', onVolver, onCambiarPes
             onClick={() => (onCambiarPestana ? onCambiarPestana('inicio') : onVolver && onVolver())}
             className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
-            Inicio
+            Home
           </button>
 
           <button
@@ -53,7 +53,7 @@ export default function TestPVC({ perfilActivo = 'grace', onVolver, onCambiarPes
             onClick={() => onCambiarPestana && onCambiarPestana('tests')}
             className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
-            Bienestar y Tests
+            Wellbeing & Tests
           </button>
 
           <button
@@ -61,14 +61,14 @@ export default function TestPVC({ perfilActivo = 'grace', onVolver, onCambiarPes
             onClick={() => onCambiarPestana && onCambiarPestana('test_orina')}
             className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
-            Test Orina
+            Urine Test
           </button>
 
           <button
             type="button"
             className="px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold tracking-wide bg-[#0d342f] text-[#34d399] border border-emerald-500/30 shadow-[0_0_15px_rgba(52,211,153,0.15)] cursor-pointer select-none"
           >
-            Test PVC
+            CVP Test
           </button>
 
           <button
@@ -76,7 +76,7 @@ export default function TestPVC({ perfilActivo = 'grace', onVolver, onCambiarPes
             onClick={() => onCambiarPestana && onCambiarPestana('test_qus')}
             className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
-            Test QUS
+            QUS Test
           </button>
         </nav>
       </header>
@@ -88,13 +88,13 @@ export default function TestPVC({ perfilActivo = 'grace', onVolver, onCambiarPes
           <div className="flex items-center gap-2 text-xs font-mono text-sky-400 uppercase tracking-widest">
             <span>BioAstro Cardiovascular</span>
             <span>//</span>
-            <span>Telemetría Hemodinámica</span>
+            <span>Hemodynamic Telemetry</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-white mt-1">
-            Test PVC (Presión Venosa Central)
+            CVP Test (Central Venous Pressure)
           </h1>
           <p className="text-sm text-slate-400 mt-1">
-            Monitoreo continuo de precarga cardíaca y redistribución de fluidos en 1/6 G
+            Continuous monitoring of cardiac preload and fluid redistribution in 1/6 G
           </p>
         </div>
 
@@ -117,10 +117,10 @@ export default function TestPVC({ perfilActivo = 'grace', onVolver, onCambiarPes
           <div>
             <div className="flex items-center justify-between">
               <h2 className="text-base font-bold text-white flex items-center gap-2">
-                <span>🫀</span> Monitor de Onda Venosa Yugular / Aurícula Derecha
+                <span>🫀</span> Jugular Venous Wave / Right Atrium Monitor
               </h2>
               <span className="text-xs font-mono px-3 py-1 rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-500/30">
-                ● En vivo (1/6 G)
+                ● Live (1/6 G)
               </span>
             </div>
 
@@ -136,28 +136,28 @@ export default function TestPVC({ perfilActivo = 'grace', onVolver, onCambiarPes
                 />
               </svg>
               <div className="absolute top-3 left-4 text-xs font-mono text-slate-400">
-                Ondas a, c, v • Desplazamiento cefálico fisiológico
+                a, c, v waves • Physiological cephalic fluid shift
               </div>
             </div>
 
             {/* Métricas clave */}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-6">
               <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
-                <span className="text-xs text-slate-400">Presión PVC</span>
+                <span className="text-xs text-slate-400">CVP Pressure</span>
                 <div className="text-2xl font-black text-white mt-1">{presionPVC.toFixed(1)} mmHg</div>
-                <span className="text-[11px] text-emerald-400 font-medium">Normal adaptado</span>
+                <span className="text-[11px] text-emerald-400 font-medium">Adapted normal</span>
               </div>
 
               <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
-                <span className="text-xs text-slate-400">Frecuencia Cardíaca</span>
-                <div className="text-2xl font-black text-white mt-1">{frecuenciaCardiaca} lpm</div>
-                <span className="text-[11px] text-sky-400 font-medium">Ritmo sinusal regular</span>
+                <span className="text-xs text-slate-400">Heart Rate</span>
+                <div className="text-2xl font-black text-white mt-1">{frecuenciaCardiaca} bpm</div>
+                <span className="text-[11px] text-sky-400 font-medium">Regular sinus rhythm</span>
               </div>
 
               <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 col-span-2 sm:col-span-1">
-                <span className="text-xs text-slate-400">Volumen Sistólico</span>
+                <span className="text-xs text-slate-400">Stroke Volume</span>
                 <div className="text-2xl font-black text-white mt-1">74 ml</div>
-                <span className="text-[11px] text-cyan-400 font-medium">Gasto óptimo</span>
+                <span className="text-[11px] text-cyan-400 font-medium">Optimal output</span>
               </div>
             </div>
           </div>
@@ -168,7 +168,7 @@ export default function TestPVC({ perfilActivo = 'grace', onVolver, onCambiarPes
               onClick={recalibrar}
               className="bg-slate-800 hover:bg-slate-700 text-sky-300 border border-sky-500/30 px-4 py-2 rounded-xl text-xs font-semibold cursor-pointer"
             >
-              {calibrado ? '⚡ Recalibrar Transductor de Presión' : 'Calibrando...'}
+              {calibrado ? '⚡ Recalibrate Pressure Transducer' : 'Calibrating...'}
             </button>
             {onVolver && (
               <button
@@ -176,7 +176,7 @@ export default function TestPVC({ perfilActivo = 'grace', onVolver, onCambiarPes
                 onClick={onVolver}
                 className="text-xs text-slate-400 hover:text-white underline cursor-pointer ml-auto"
               >
-                ← Volver a Inicio
+                ← Return to Home
               </button>
             )}
           </div>
@@ -185,9 +185,9 @@ export default function TestPVC({ perfilActivo = 'grace', onVolver, onCambiarPes
         {/* Checkboxes de Configuración y Diagnóstico */}
         <div className="bg-[#131d2e] border border-slate-700/80 rounded-3xl p-6 shadow-xl flex flex-col justify-between">
           <div>
-            <h3 className="text-base font-bold text-white mb-2">Parámetros del Sensor</h3>
+            <h3 className="text-base font-bold text-white mb-2">Sensor Parameters</h3>
             <p className="text-xs text-slate-400 mb-6">
-              Filtro digital contra vibración del motor del rover lunar
+              Digital filter against lunar rover motor vibrations
             </p>
 
             <div className="space-y-4">
@@ -198,7 +198,7 @@ export default function TestPVC({ perfilActivo = 'grace', onVolver, onCambiarPes
                   onChange={(e) => setCompensacionGravedad(e.target.checked)}
                   className="w-4 h-4 rounded border-slate-700 bg-slate-800 text-sky-500 accent-sky-500 cursor-pointer"
                 />
-                <span>Compensación barométrica 1/6 G</span>
+                <span>1/6 G barometric compensation</span>
               </label>
 
               <label className="flex items-center gap-2.5 text-xs text-slate-300 hover:text-white cursor-pointer select-none">
@@ -208,7 +208,7 @@ export default function TestPVC({ perfilActivo = 'grace', onVolver, onCambiarPes
                   onChange={(e) => setFiltroOndaVenosa(e.target.checked)}
                   className="w-4 h-4 rounded border-slate-700 bg-slate-800 text-sky-500 accent-sky-500 cursor-pointer"
                 />
-                <span>Filtro de artefacto de movimiento</span>
+                <span>Motion artifact filter</span>
               </label>
 
               <label className="flex items-center gap-2.5 text-xs text-slate-300 hover:text-white cursor-pointer select-none">
@@ -218,7 +218,7 @@ export default function TestPVC({ perfilActivo = 'grace', onVolver, onCambiarPes
                   onChange={(e) => setSensorTranscutaneo(e.target.checked)}
                   className="w-4 h-4 rounded border-slate-700 bg-slate-800 text-sky-500 accent-sky-500 cursor-pointer"
                 />
-                <span>Sensor transcutáneo no invasivo</span>
+                <span>Non-invasive transcutaneous sensor</span>
               </label>
 
               <label className="flex items-center gap-2.5 text-xs text-slate-300 hover:text-white cursor-pointer select-none">
@@ -228,13 +228,13 @@ export default function TestPVC({ perfilActivo = 'grace', onVolver, onCambiarPes
                   onChange={(e) => setAlertaSobrecarga(e.target.checked)}
                   className="w-4 h-4 rounded border-slate-700 bg-slate-800 text-amber-500 accent-amber-500 cursor-pointer"
                 />
-                <span>Alerta por congestión venosa cefálica</span>
+                <span>Cephalic venous congestion alert</span>
               </label>
             </div>
 
             <div className="mt-8 p-4 rounded-2xl bg-[#091b2e] border border-sky-500/30 text-xs text-slate-300">
-              <span className="font-bold text-sky-400 block mb-1">Nota Médica Artemis:</span>
-              La microgravedad produce una traslocación de sangre hacia la cabeza y tórax. Mantener la PVC en rango menor a 8 mmHg previene cefaleas y edema facial.
+              <span className="font-bold text-sky-400 block mb-1">Artemis Medical Note:</span>
+              Reduced gravity causes fluid redistribution toward the head and chest. Maintaining CVP under 8 mmHg prevents cephalic headaches and facial edema.
             </div>
           </div>
         </div>

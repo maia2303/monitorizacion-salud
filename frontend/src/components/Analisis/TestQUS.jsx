@@ -14,8 +14,8 @@ export default function TestQUS({ perfilActivo = 'grace', onVolver, onCambiarPes
   const [alertaImpacto, setAlertaImpacto] = useState(perfilActivo === 'rocky');
 
   const astronauta = perfilActivo === 'grace'
-    ? { nombre: 'Grace K. Wilson', rango: 'Comandante', avatar: <GraceAvatar className="w-12 h-12" /> }
-    : { nombre: 'Rocky C. Mendoza', rango: 'Piloto', avatar: <RockyAvatar className="w-12 h-12" /> };
+    ? { nombre: 'Grace K. Wilson', rango: 'Commander', avatar: <GraceAvatar className="w-12 h-12" /> }
+    : { nombre: 'Rocky C. Mendoza', rango: 'Pilot', avatar: <RockyAvatar className="w-12 h-12" /> };
 
   const ejecutarEscaneo = () => {
     setEscaneando(true);
@@ -33,12 +33,12 @@ export default function TestQUS({ perfilActivo = 'grace', onVolver, onCambiarPes
       <header className="px-6 sm:px-10 py-5 border-b border-slate-800/80 flex flex-wrap items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 text-xs md:text-sm font-mono tracking-wider">
-            <span className="font-bold text-slate-200">ROVER LUNAR</span>
+            <span className="font-bold text-slate-200">LUNAR ROVER</span>
             <span className="text-cyan-400 font-bold mx-1">//</span>
-            <span className="text-slate-300 font-normal">DÍA 42</span>
+            <span className="text-slate-300 font-normal">DAY 42</span>
           </div>
           <div className="text-xs text-slate-400 mt-1">
-            {astronauta.nombre} · Tripulación A
+            {astronauta.nombre} · Crew A
           </div>
         </div>
 
@@ -48,7 +48,7 @@ export default function TestQUS({ perfilActivo = 'grace', onVolver, onCambiarPes
             onClick={() => (onCambiarPestana ? onCambiarPestana('inicio') : onVolver && onVolver())}
             className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
-            Inicio
+            Home
           </button>
 
           <button
@@ -56,7 +56,7 @@ export default function TestQUS({ perfilActivo = 'grace', onVolver, onCambiarPes
             onClick={() => onCambiarPestana && onCambiarPestana('tests')}
             className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
-            Bienestar y Tests
+            Wellness & Tests
           </button>
 
           <button
@@ -64,7 +64,7 @@ export default function TestQUS({ perfilActivo = 'grace', onVolver, onCambiarPes
             onClick={() => onCambiarPestana && onCambiarPestana('test_orina')}
             className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
-            Test Orina
+            Urine Test
           </button>
 
           <button
@@ -72,14 +72,14 @@ export default function TestQUS({ perfilActivo = 'grace', onVolver, onCambiarPes
             onClick={() => onCambiarPestana && onCambiarPestana('test_pvc')}
             className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
-            Test PVC
+            CVP Test
           </button>
 
           <button
             type="button"
             className="px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold tracking-wide bg-[#0d342f] text-[#34d399] border border-emerald-500/30 shadow-[0_0_15px_rgba(52,211,153,0.15)] cursor-pointer select-none"
           >
-            Test QUS
+            QUS Test
           </button>
         </nav>
       </header>
@@ -89,15 +89,15 @@ export default function TestQUS({ perfilActivo = 'grace', onVolver, onCambiarPes
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-slate-800">
         <div>
           <div className="flex items-center gap-2 text-xs font-mono text-emerald-400 uppercase tracking-widest">
-            <span>BioAstro Osteología</span>
+            <span>BioAstro Osteology</span>
             <span>//</span>
-            <span>Ultrasonometría Cuantitativa</span>
+            <span>Quantitative Ultrasound</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-white mt-1">
-            Test QUS (Ultrasonido de Calcáneo)
+            QUS Test (Calcaneus Ultrasound)
           </h1>
           <p className="text-sm text-slate-400 mt-1">
-            Evaluación no invasiva de microarquitectura y densidad mineral ósea lunar
+            Non-invasive assessment of lunar bone mineral density and microarchitecture
           </p>
         </div>
 
@@ -120,17 +120,17 @@ export default function TestQUS({ perfilActivo = 'grace', onVolver, onCambiarPes
           <div>
             <div className="flex items-center justify-between">
               <h2 className="text-base font-bold text-white flex items-center gap-2">
-                <span>🦴</span> Transmisión Acústica de Calcáneo Bilateral
+                <span>🦴</span> Bilateral Calcaneal Acoustic Transmission
               </h2>
               <span className="text-xs font-mono px-3 py-1 rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-500/30">
-                Transductor Lunar QUS-2
+                Lunar QUS-2 Transducer
               </span>
             </div>
 
             {/* Gráfico de Ondas Acústicas */}
             <div className="mt-6 p-4 rounded-2xl bg-slate-950 border border-slate-800 h-44 flex flex-col justify-between relative overflow-hidden">
               <div className="text-xs font-mono text-slate-400">
-                Atenuación Acústica de Banda Ancha (BUA) vs Velocidad del Sonido (SOS)
+                Broadband Ultrasound Attenuation (BUA) vs Speed of Sound (SOS)
               </div>
 
               {/* Curvas de ultrasonido */}
@@ -152,7 +152,7 @@ export default function TestQUS({ perfilActivo = 'grace', onVolver, onCambiarPes
 
               <div className="flex justify-between text-[11px] font-mono text-slate-500">
                 <span>0.2 MHz</span>
-                <span>0.5 MHz (Frecuencia Central)</span>
+                <span>0.5 MHz (Center Frequency)</span>
                 <span>0.8 MHz</span>
               </div>
             </div>
@@ -160,22 +160,22 @@ export default function TestQUS({ perfilActivo = 'grace', onVolver, onCambiarPes
             {/* Métricas clave */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
               <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
-                <span className="text-xs text-slate-400">BUA (Atenuación)</span>
+                <span className="text-xs text-slate-400">BUA (Attenuation)</span>
                 <div className="text-2xl font-black text-white mt-1">{bua} dB/MHz</div>
-                <span className="text-[11px] text-emerald-400 font-medium">Trabecular denso</span>
+                <span className="text-[11px] text-emerald-400 font-medium">Dense trabecular</span>
               </div>
 
               <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
-                <span className="text-xs text-slate-400">SOS (Velocidad)</span>
+                <span className="text-xs text-slate-400">SOS (Speed)</span>
                 <div className="text-2xl font-black text-white mt-1">{sos} m/s</div>
-                <span className="text-[11px] text-sky-400 font-medium">Elasticidad ósea óptima</span>
+                <span className="text-[11px] text-sky-400 font-medium">Optimal bone elasticity</span>
               </div>
 
               <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
-                <span className="text-xs text-slate-400">T-Score Estimado</span>
+                <span className="text-xs text-slate-400">Estimated T-Score</span>
                 <div className="text-2xl font-black text-white mt-1">{tScore}</div>
                 <span className={`text-[11px] font-medium ${tScore >= -0.5 ? 'text-emerald-400' : 'text-amber-400'}`}>
-                  {tScore >= -0.5 ? 'Sin osteopenia' : 'Alerta de resorción leve'}
+                  {tScore >= -0.5 ? 'No osteopenia' : 'Mild resorption alert'}
                 </span>
               </div>
             </div>
@@ -188,7 +188,7 @@ export default function TestQUS({ perfilActivo = 'grace', onVolver, onCambiarPes
               onClick={ejecutarEscaneo}
               className="bg-[#10b981] hover:bg-[#34d399] active:bg-[#059669] text-[#062018] font-bold px-5 py-2.5 rounded-xl text-xs sm:text-sm cursor-pointer shadow-lg shadow-emerald-500/20 disabled:opacity-50"
             >
-              {escaneando ? 'Transmitiendo ultrasonido...' : '⚡ Iniciar Escaneo QUS de Talón'}
+              {escaneando ? 'Transmitting ultrasound...' : '⚡ Start Heel QUS Scan'}
             </button>
 
             {onVolver && (
@@ -197,7 +197,7 @@ export default function TestQUS({ perfilActivo = 'grace', onVolver, onCambiarPes
                 onClick={onVolver}
                 className="text-xs text-slate-400 hover:text-white underline cursor-pointer ml-auto"
               >
-                ← Volver a Inicio
+                ← Back to Home
               </button>
             )}
           </div>
@@ -206,9 +206,9 @@ export default function TestQUS({ perfilActivo = 'grace', onVolver, onCambiarPes
         {/* Panel lateral con checkboxes interactivos */}
         <div className="bg-[#131d2e] border border-slate-700/80 rounded-3xl p-6 shadow-xl flex flex-col justify-between">
           <div>
-            <h3 className="text-base font-bold text-white mb-2">Protocolo de Ultrasonido</h3>
+            <h3 className="text-base font-bold text-white mb-2">Ultrasound Protocol</h3>
             <p className="text-xs text-slate-400 mb-6">
-              Control de absorción mecánica y bandas de resistencia
+              Mechanical absorption control & resistance bands
             </p>
 
             <div className="space-y-4">
@@ -219,7 +219,7 @@ export default function TestQUS({ perfilActivo = 'grace', onVolver, onCambiarPes
                   onChange={(e) => setCalibracionGel(e.target.checked)}
                   className="w-4 h-4 rounded border-slate-700 bg-slate-800 text-emerald-500 accent-emerald-500 cursor-pointer"
                 />
-                <span>Acoplamiento acústico (Gel de contacto)</span>
+                <span>Acoustic coupling (Contact gel)</span>
               </label>
 
               <label className="flex items-center gap-2.5 text-xs text-slate-300 hover:text-white cursor-pointer select-none">
@@ -229,7 +229,7 @@ export default function TestQUS({ perfilActivo = 'grace', onVolver, onCambiarPes
                   onChange={(e) => setAnalisisCalcaneo(e.target.checked)}
                   className="w-4 h-4 rounded border-slate-700 bg-slate-800 text-emerald-500 accent-emerald-500 cursor-pointer"
                 />
-                <span>Cálculo de índice de rigidez (Stiffness Index)</span>
+                <span>Stiffness Index calculation</span>
               </label>
 
               <label className="flex items-center gap-2.5 text-xs text-slate-300 hover:text-white cursor-pointer select-none">
@@ -239,7 +239,7 @@ export default function TestQUS({ perfilActivo = 'grace', onVolver, onCambiarPes
                   onChange={(e) => setSeguimientoHistorico(e.target.checked)}
                   className="w-4 h-4 rounded border-slate-700 bg-slate-800 text-emerald-500 accent-emerald-500 cursor-pointer"
                 />
-                <span>Sincronizar telemetría ósea con NASA / ESA</span>
+                <span>Synchronize bone telemetry with NASA / ESA</span>
               </label>
 
               <label className="flex items-center gap-2.5 text-xs text-slate-300 hover:text-white cursor-pointer select-none">
@@ -249,13 +249,13 @@ export default function TestQUS({ perfilActivo = 'grace', onVolver, onCambiarPes
                   onChange={(e) => setAlertaImpacto(e.target.checked)}
                   className="w-4 h-4 rounded border-slate-700 bg-slate-800 text-amber-500 accent-amber-500 cursor-pointer"
                 />
-                <span>Exigir 20 min de marcha con bandas elásticas</span>
+                <span>Require 20 min gait with elastic resistance bands</span>
               </label>
             </div>
 
             <div className="mt-8 p-4 rounded-2xl bg-[#09221c] border border-emerald-500/30 text-xs text-slate-300">
-              <span className="font-bold text-emerald-400 block mb-1">Prescripción de Ejercicio:</span>
-              El impacto mecánico al caminar en la Luna (1/6 G) no basta por sí solo para mantener la densidad trabecular. Realizar saltos controlados contra arnés reactivo.
+              <span className="font-bold text-emerald-400 block mb-1">Exercise Prescription:</span>
+              Mechanical impact walking in Lunar gravity (1/6 G) is insufficient on its own to maintain trabecular density. Perform controlled jumps against reactive harness.
             </div>
           </div>
         </div>

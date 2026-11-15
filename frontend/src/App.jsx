@@ -29,8 +29,8 @@ function App() {
   // Una vez iniciada la sesión, se accede a los datos y a las vistas con navegación
   const datosAstronauta =
     astronautaAutenticado === 'grace'
-      ? { nombre: 'Cmdte. Grace K. Wilson', tripulacion: 'Tripulación A' }
-      : { nombre: 'Piloto Rocky C. Mendoza', tripulacion: 'Tripulación A' };
+      ? { nombre: 'Cmdr. Grace K. Wilson', tripulacion: 'Crew A' }
+      : { nombre: 'Pilot Rocky C. Mendoza', tripulacion: 'Crew A' };
 
   return (
     <div className="min-h-screen w-full bg-[#0b1220] text-slate-100 flex flex-col justify-between selection:bg-cyan-500 selection:text-slate-900 relative">
@@ -41,11 +41,11 @@ function App() {
           type="button"
           onClick={() => setAstronautaAutenticado(null)}
           className="bg-slate-900/90 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/80 px-3.5 py-2 rounded-xl text-xs font-medium flex items-center gap-1.5 shadow-md cursor-pointer transition-all"
-          title="Cerrar sesión del astronauta"
+          title="Sign out astronaut"
         >
           <span>👤 {datosAstronauta.nombre.split(' ')[1]}</span>
           <span className="text-slate-500">|</span>
-          <span className="text-cyan-400 hover:underline">Cambiar Perfil</span>
+          <span className="text-cyan-400 hover:underline">Switch Profile</span>
         </button>
       </div>
 

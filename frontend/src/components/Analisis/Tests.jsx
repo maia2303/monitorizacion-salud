@@ -260,7 +260,7 @@ function IlustracionSueno() {
 }
 
 export default function Tests({
-  astronauta = { nombre: 'Cmdte. Alex Vega', tripulacion: 'Tripulación A' },
+  astronauta = { nombre: 'Cmdr. Alex Vega', tripulacion: 'Crew A' },
   onCambiarPestana,
   onVolver,
 }) {
@@ -278,9 +278,9 @@ export default function Tests({
       <header className="px-6 sm:px-10 py-5 border-b border-slate-800/80 flex flex-wrap items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 text-xs md:text-sm font-mono tracking-wider">
-            <span className="font-bold text-slate-200">ROVER LUNAR</span>
+            <span className="font-bold text-slate-200">LUNAR ROVER</span>
             <span className="text-cyan-400 font-bold mx-1">//</span>
-            <span className="text-slate-300 font-normal">DÍA 42</span>
+            <span className="text-slate-300 font-normal">DAY 42</span>
           </div>
           <div className="text-xs text-slate-400 mt-1">
             {astronauta.nombre} · {astronauta.tripulacion}
@@ -293,14 +293,14 @@ export default function Tests({
             onClick={() => irAPestana('inicio')}
             className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
-            Inicio
+            Home
           </button>
 
           <button
             type="button"
             className="px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold tracking-wide bg-[#0d342f] text-[#34d399] border border-emerald-500/30 shadow-[0_0_15px_rgba(52,211,153,0.15)] cursor-pointer select-none"
           >
-            Bienestar y Tests
+            Wellness & Tests
           </button>
 
           <button
@@ -308,7 +308,7 @@ export default function Tests({
             onClick={() => irAPestana('test_orina')}
             className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
-            Test Orina
+            Urine Test
           </button>
 
           <button
@@ -316,7 +316,7 @@ export default function Tests({
             onClick={() => irAPestana('test_pvc')}
             className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
-            Test PVC
+            CVP Test
           </button>
 
           <button
@@ -324,7 +324,7 @@ export default function Tests({
             onClick={() => irAPestana('test_qus')}
             className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
-            Test QUS
+            QUS Test
           </button>
         </nav>
       </header>
@@ -335,16 +335,16 @@ export default function Tests({
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
           <div>
             <h1 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
-              Bienestar y Evaluación
+              Wellness & Evaluation
             </h1>
             <p className="text-[#a8c4d5] mt-2 text-base sm:text-lg">
-              Evaluaciones emocionales y de descanso para la misión.
+              Emotional and rest evaluations for the mission.
             </p>
           </div>
 
           <div className="bg-[#102a26] text-[#2ee59d] border border-[#2ee59d]/25 px-5 py-2 rounded-full text-xs sm:text-sm font-medium flex items-center gap-2.5 shadow-sm">
             <span className="w-2 h-2 rounded-full bg-[#2ee59d] shadow-[0_0_8px_#2ee59d] animate-pulse"></span>
-            <span>Todo en orden a bordo</span>
+            <span>All systems nominal on board</span>
           </div>
         </div>
 
@@ -354,10 +354,10 @@ export default function Tests({
           <div className="bg-[#162234] border border-slate-800/90 hover:border-slate-700 rounded-3xl p-7 sm:p-10 flex flex-col justify-between shadow-2xl transition-all duration-300">
             <div>
               <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-                Estado emocional — PANAS
+                Emotional State — PANAS
               </h2>
               <p className="text-[#a8c4d5] text-base sm:text-lg mt-2 leading-relaxed">
-                Registrá cómo te sentís en este momento
+                Log how you feel right now
               </p>
             </div>
 
@@ -370,7 +370,7 @@ export default function Tests({
               onClick={() => irAPestana('test_panas')}
               className="w-full bg-[#2ee59d] hover:bg-[#3df2aa] active:scale-[0.99] text-[#062018] font-bold text-base sm:text-lg py-3.5 px-6 rounded-full shadow-[0_0_24px_rgba(46,229,157,0.25)] transition-all duration-200 cursor-pointer"
             >
-              Comenzar evaluación
+              Start evaluation
             </button>
           </div>
 
@@ -378,10 +378,10 @@ export default function Tests({
           <div className="bg-[#162234] border border-slate-800/90 hover:border-slate-700 rounded-3xl p-7 sm:p-10 flex flex-col justify-between shadow-2xl transition-all duration-300">
             <div>
               <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-                Calidad del sueño
+                Sleep Quality
               </h2>
               <p className="text-[#a8c4d5] text-base sm:text-lg mt-2 leading-relaxed">
-                Contanos cómo fue tu descanso antes de comenzar la jornada
+                Tell us how your rest was before starting the day
               </p>
             </div>
 
@@ -394,7 +394,7 @@ export default function Tests({
               onClick={() => irAPestana('test_sueno')}
               className="w-full bg-[#2ee59d] hover:bg-[#3df2aa] active:scale-[0.99] text-[#062018] font-bold text-base sm:text-lg py-3.5 px-6 rounded-full shadow-[0_0_24px_rgba(46,229,157,0.25)] transition-all duration-200 cursor-pointer"
             >
-              Registrar descanso
+              Log rest
             </button>
           </div>
         </div>
@@ -404,10 +404,10 @@ export default function Tests({
       <footer className="w-full px-6 sm:px-10 py-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm">
         <div className="flex items-center gap-2 text-[#4d8ec4]">
           <span className="w-2 h-2 rounded-full bg-[#3b9eff]"></span>
-          <span>Datos sincronizados · 14:32</span>
+          <span>Data synced · 14:32</span>
         </div>
         <div className="text-[#8ba3b8]">
-          Respira. Tu ritmo también importa.
+          Breathe. Your pace matters too.
         </div>
       </footer>
     </div>

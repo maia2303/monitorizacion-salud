@@ -6,84 +6,84 @@ const COLORES_TIRA = [
     id: 1,
     color: '#fefce8',
     borde: '#fef08a',
-    nombre: 'Muy claro / Transparente',
+    nombre: 'Very clear / Transparent',
     nivel: '100%',
     densidad: '1.005',
     ph: '7.0',
-    estado: 'Hidratación Óptima',
-    mensaje: 'Excelente balance de fluidos. Tus riñones están filtrando el calcio de forma fluida.',
+    estado: 'Optimal Hydration',
+    mensaje: 'Excellent fluid balance. Your kidneys are filtering calcium smoothly.',
     alerta: false,
   },
   {
     id: 2,
     color: '#fef08a',
     borde: '#fde047',
-    nombre: 'Amarillo Pálido Pajizo',
+    nombre: 'Pale Straw Yellow',
     nivel: '90%',
     densidad: '1.012',
     ph: '6.8',
-    estado: 'Hidratación Ideal',
-    mensaje: 'Nivel recomendado para travesías en el rover y caminatas EVA.',
+    estado: 'Ideal Hydration',
+    mensaje: 'Recommended level for rover traverses and EVA moonwalks.',
     alerta: false,
   },
   {
     id: 3,
     color: '#fde047',
     borde: '#eab308',
-    nombre: 'Amarillo Claro Normal',
+    nombre: 'Standard Light Yellow',
     nivel: '80%',
     densidad: '1.018',
     ph: '6.5',
-    estado: 'Hidratación Adecuada',
-    mensaje: 'Buen nivel metabólico. Mantener ingesta de 200 ml cada 60 minutos.',
+    estado: 'Adequate Hydration',
+    mensaje: 'Good metabolic level. Maintain intake of 200 ml every 60 minutes.',
     alerta: false,
   },
   {
     id: 4,
     color: '#eab308',
     borde: '#ca8a04',
-    nombre: 'Amarillo Oscuro / Dorado',
+    nombre: 'Dark / Golden Yellow',
     nivel: '65%',
     densidad: '1.022',
     ph: '6.0',
-    estado: 'Hidratación Moderada',
-    mensaje: 'Comienza una ligera concentración de solutos. Bebe un vaso de agua antes de la próxima tarea.',
+    estado: 'Moderate Hydration',
+    mensaje: 'Slight solute concentration beginning. Drink a glass of water before your next task.',
     alerta: false,
   },
   {
     id: 5,
     color: '#ca8a04',
     borde: '#a16207',
-    nombre: 'Ámbar Claro',
+    nombre: 'Light Amber',
     nivel: '50%',
     densidad: '1.026',
     ph: '5.8',
-    estado: 'Deshidratación Leve',
-    mensaje: 'Alerta de reabsorción ósea. Tus riñones necesitan 350 ml de agua para disolver el calcio.',
+    estado: 'Mild Dehydration',
+    mensaje: 'Bone reabsorption alert. Your kidneys need 350 ml of water to dissolve calcium.',
     alerta: true,
   },
   {
     id: 6,
     color: '#a16207',
     borde: '#854d0e',
-    nombre: 'Ámbar Intenso',
+    nombre: 'Deep Amber',
     nivel: '35%',
     densidad: '1.030',
     ph: '5.5',
-    estado: 'Deshidratación Notoria',
-    mensaje: 'Se detecta aumento en la densidad de la muestra. Bebe 500 ml de electrolitos inmediatamente.',
+    estado: 'Noticeable Dehydration',
+    mensaje: 'Increased sample density detected. Drink 500 ml of electrolytes immediately.',
     alerta: true,
   },
   {
     id: 7,
     color: '#713f12',
     borde: '#451a03',
-    nombre: 'Marrón Ámbar Oscuro',
+    nombre: 'Dark Brown Amber',
     nivel: '20%',
     densidad: '1.035',
     ph: '5.2',
-    estado: 'Deshidratación Severa',
-    mensaje: 'Riesgo inminente de microcristales de calcio. Notifica a soporte médico y suspende la actividad física pesada.',
+    estado: 'Severe Dehydration',
+    mensaje: 'Imminent risk of calcium microcrystals. Notify medical support and pause heavy physical activity.',
     alerta: true,
   },
 ];
@@ -107,12 +107,12 @@ export default function ControlOrina({ onVolver, onCambiarPestana }) {
       <header className="px-6 sm:px-10 py-5 border-b border-slate-800/80 flex flex-wrap items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 text-xs md:text-sm font-mono tracking-wider">
-            <span className="font-bold text-slate-200">ROVER LUNAR</span>
+            <span className="font-bold text-slate-200">LUNAR ROVER</span>
             <span className="text-cyan-400 font-bold mx-1">//</span>
-            <span className="text-slate-300 font-normal">DÍA 42</span>
+            <span className="text-slate-300 font-normal">DAY 42</span>
           </div>
           <div className="text-xs text-slate-400 mt-1">
-            Test Rápido de Hidratación · Control de Tira Reactiva
+            Rapid Hydration Test · Test Strip Control
           </div>
         </div>
 
@@ -123,7 +123,7 @@ export default function ControlOrina({ onVolver, onCambiarPestana }) {
             onClick={() => onCambiarPestana ? onCambiarPestana('inicio') : onVolver && onVolver()}
             className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
-            Inicio
+            Home
           </button>
 
           <button
@@ -131,14 +131,14 @@ export default function ControlOrina({ onVolver, onCambiarPestana }) {
             onClick={() => onCambiarPestana && onCambiarPestana('tests')}
             className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
-            Bienestar y Tests
+            Wellness & Tests
           </button>
           
           <button
             type="button"
             className="px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold tracking-wide bg-[#0d342f] text-[#34d399] border border-emerald-500/30 shadow-[0_0_15px_rgba(52,211,153,0.15)] cursor-pointer select-none"
           >
-            Test Orina
+            Urine Test
           </button>
 
           <button
@@ -146,7 +146,7 @@ export default function ControlOrina({ onVolver, onCambiarPestana }) {
             onClick={() => onCambiarPestana && onCambiarPestana('test_pvc')}
             className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
-            Test PVC
+            CVP Test
           </button>
 
           <button
@@ -154,7 +154,7 @@ export default function ControlOrina({ onVolver, onCambiarPestana }) {
             onClick={() => onCambiarPestana && onCambiarPestana('test_qus')}
             className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
-            Test QUS
+            QUS Test
           </button>
         </nav>
       </header>
@@ -165,20 +165,20 @@ export default function ControlOrina({ onVolver, onCambiarPestana }) {
         {/* TÍTULO */}
         <div className="text-center max-w-2xl mx-auto mb-8">
           <span className="text-xs font-mono text-cyan-400 uppercase tracking-widest block mb-1">
-            Lectura Rápida de Biomarcador
+            Rapid Biomarker Reading
           </span>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Selecciona el color de tu tira reactiva
+            Select the color of your test strip
           </h1>
           <p className="text-slate-400 mt-2 text-sm sm:text-base">
-            Compara tu tira de orina con la escala visual para registrar tu hidratación automáticamente.
+            Compare your urine strip with the visual scale to log your hydration automatically.
           </p>
         </div>
 
         {/* FEEDBACK DE GUARDADO */}
         {guardadoExitoso && (
           <div className="mb-6 max-w-md mx-auto px-4 py-2.5 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 shadow-lg animate-fadeIn">
-            <span>✓</span> Muestra sincronizada exitosamente con la telemetría del rover
+            <span>✓</span> Sample successfully synchronized with rover telemetry
           </div>
         )}
 
@@ -186,10 +186,10 @@ export default function ControlOrina({ onVolver, onCambiarPestana }) {
         <div className="bg-[#131d2e] border border-slate-800/90 rounded-3xl p-6 sm:p-8 shadow-2xl mb-8">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-bold text-white flex items-center gap-2">
-              <span>🧪</span> Escala Cromática Lunar (Toca el color obtenido)
+              <span>🧪</span> Lunar Color Scale (Tap the matched color)
             </h2>
             <span className="text-xs text-slate-400 font-mono">
-              7 niveles de hidratación
+              7 hydration levels
             </span>
           </div>
 
@@ -227,7 +227,7 @@ export default function ControlOrina({ onVolver, onCambiarPestana }) {
                   {/* Nombre y nivel */}
                   <div className="text-center mt-3">
                     <span className="text-xs font-bold text-white block">
-                      Nivel {muestra.id}
+                      Level {muestra.id}
                     </span>
                     <span className="text-[11px] text-slate-400 font-medium block truncate max-w-[90px]">
                       {muestra.nombre}
@@ -252,7 +252,7 @@ export default function ControlOrina({ onVolver, onCambiarPestana }) {
           {/* Tarjeta de Representación Visual de la Tira */}
           <div className="bg-[#131d2e] border border-slate-800/90 rounded-3xl p-6 sm:p-7 shadow-2xl flex flex-col items-center justify-between text-center">
             <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold">
-              Tu Tira Reactiva
+              Your Test Strip
             </span>
 
             {/* Simulación visual de la tira física */}
@@ -273,7 +273,7 @@ export default function ControlOrina({ onVolver, onCambiarPestana }) {
             </div>
 
             <div className="text-xs text-slate-400">
-              Color detectado: <strong className="text-white">{muestraActual.nombre}</strong>
+              Detected color: <strong className="text-white">{muestraActual.nombre}</strong>
             </div>
           </div>
 
@@ -283,7 +283,7 @@ export default function ControlOrina({ onVolver, onCambiarPestana }) {
               {/* Encabezado del resultado */}
               <div className="flex items-center justify-between pb-4 border-b border-slate-800">
                 <div>
-                  <span className="text-xs text-slate-400">Estado de Hidratación</span>
+                  <span className="text-xs text-slate-400">Hydration Status</span>
                   <h3 className="text-2xl font-bold text-white mt-0.5">
                     {muestraActual.estado}
                   </h3>
@@ -300,7 +300,7 @@ export default function ControlOrina({ onVolver, onCambiarPestana }) {
               {/* Métricas estimadas */}
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 my-5">
                 <div className="bg-slate-900/70 border border-slate-800 rounded-2xl p-4">
-                  <span className="text-xs text-slate-400 block">Densidad urinaria</span>
+                  <span className="text-xs text-slate-400 block">Urine specific gravity</span>
                   <span className="text-xl font-bold text-white mt-1 block">
                     {muestraActual.densidad}
                   </span>
@@ -308,19 +308,19 @@ export default function ControlOrina({ onVolver, onCambiarPestana }) {
                 </div>
 
                 <div className="bg-slate-900/70 border border-slate-800 rounded-2xl p-4">
-                  <span className="text-xs text-slate-400 block">pH estimado</span>
+                  <span className="text-xs text-slate-400 block">Estimated pH</span>
                   <span className="text-xl font-bold text-white mt-1 block">
                     {muestraActual.ph}
                   </span>
-                  <span className="text-[11px] text-slate-500">Balance fisiológico</span>
+                  <span className="text-[11px] text-slate-500">Physiological balance</span>
                 </div>
 
                 <div className="bg-slate-900/70 border border-slate-800 rounded-2xl p-4 col-span-2 sm:col-span-1">
-                  <span className="text-xs text-slate-400 block">Filtrado de Calcio</span>
+                  <span className="text-xs text-slate-400 block">Calcium Filtration</span>
                   <span className="text-xl font-bold text-white mt-1 block">
-                    {muestraActual.alerta ? 'Riesgo Alto' : 'Normal en 1/6 G'}
+                    {muestraActual.alerta ? 'High Risk' : 'Normal in 1/6 G'}
                   </span>
-                  <span className="text-[11px] text-slate-500">Protección ósea</span>
+                  <span className="text-[11px] text-slate-500">Bone protection</span>
                 </div>
               </div>
 
@@ -333,7 +333,7 @@ export default function ControlOrina({ onVolver, onCambiarPestana }) {
                 }`}
               >
                 <strong className={muestraActual.alerta ? 'text-amber-400' : 'text-emerald-400'}>
-                  Recomendación BioAstro:
+                  BioAstro Recommendation:
                 </strong>{' '}
                 {muestraActual.mensaje}
               </div>
@@ -342,14 +342,14 @@ export default function ControlOrina({ onVolver, onCambiarPestana }) {
             {/* Botón para guardar / sincronizar la muestra */}
             <div className="mt-6 flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-slate-800">
               <span className="text-xs text-slate-400">
-                ¿El color coincide? Presiona para registrar la muestra diaria.
+                Does the color match? Tap to record daily sample.
               </span>
               <button
                 type="button"
                 onClick={handleGuardar}
                 className="bg-[#10b981] hover:bg-[#34d399] active:bg-[#059669] text-[#062018] font-bold text-sm py-2.5 px-6 rounded-xl flex items-center gap-2 cursor-pointer transition-all shadow-lg shadow-emerald-500/20"
               >
-                <span>Guardar Muestra</span>
+                <span>Save Sample</span>
                 <span>✓</span>
               </button>
             </div>
@@ -363,10 +363,10 @@ export default function ControlOrina({ onVolver, onCambiarPestana }) {
       <footer className="px-6 sm:px-10 py-5 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400 bg-[#0a0f1c]/70">
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-          <span>Sensor de análisis in-situ conectado</span>
+          <span>In-situ analysis sensor connected</span>
         </div>
         <div className="italic text-slate-400">
-          Respira. Tu ritmo también importa.
+          Breathe. Your pace matters too.
         </div>
       </footer>
 

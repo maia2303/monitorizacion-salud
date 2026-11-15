@@ -2,38 +2,38 @@ import React, { useState } from 'react';
 import { bioastroApi } from '../../services/bioastroApi';
 
 const PREGUNTAS_PANAS = [
-  { numero: 1, emocion: 'Interesado/a', dimension: 'PA', pregunta: '¿Te sentís interesado/a?' },
-  { numero: 2, emocion: 'Angustiado/a', dimension: 'NA', pregunta: '¿Te sentís angustiado/a?' },
-  { numero: 3, emocion: 'Entusiasmado/a', dimension: 'PA', pregunta: '¿Te sentís entusiasmado/a?' },
-  { numero: 4, emocion: 'Molesto/a o disgustado/a', dimension: 'NA', pregunta: '¿Te sentís molesto/a o disgustado/a?' },
-  { numero: 5, emocion: 'Fuerte', dimension: 'PA', pregunta: '¿Te sentís fuerte?' },
-  { numero: 6, emocion: 'Culpable', dimension: 'NA', pregunta: '¿Te sentís culpable?' },
-  { numero: 7, emocion: 'Entusiasta', dimension: 'PA', pregunta: '¿Te sentís entusiasta?' },
-  { numero: 8, emocion: 'Asustado/a', dimension: 'NA', pregunta: '¿Te sentís asustado/a?' },
-  { numero: 9, emocion: 'Orgulloso/a', dimension: 'PA', pregunta: '¿Te sentís orgulloso/a?' },
-  { numero: 10, emocion: 'Hostil', dimension: 'NA', pregunta: '¿Te sentís hostil?' },
-  { numero: 11, emocion: 'Alerta', dimension: 'PA', pregunta: '¿Te sentís alerta?' },
-  { numero: 12, emocion: 'Irritable', dimension: 'NA', pregunta: '¿Te sentís irritable?' },
-  { numero: 13, emocion: 'Inspirado/a', dimension: 'PA', pregunta: '¿Te sentís inspirado/a?' },
-  { numero: 14, emocion: 'Avergonzado/a', dimension: 'NA', pregunta: '¿Te sentís avergonzado/a?' },
-  { numero: 15, emocion: 'Decidido/a', dimension: 'PA', pregunta: '¿Te sentís decidido/a?' },
-  { numero: 16, emocion: 'Nervioso/a', dimension: 'NA', pregunta: '¿Te sentís nervioso/a?' },
-  { numero: 17, emocion: 'Atento/a', dimension: 'PA', pregunta: '¿Te sentís atento/a?' },
-  { numero: 18, emocion: 'Inquieto/a o intranquilo/a', dimension: 'NA', pregunta: '¿Te sentís inquieto/a o intranquilo/a?' },
-  { numero: 19, emocion: 'Activo/a', dimension: 'PA', pregunta: '¿Te sentís activo/a?' },
-  { numero: 20, emocion: 'Temeroso/a', dimension: 'NA', pregunta: '¿Te sentís temeroso/a?' },
+  { numero: 1, emocion: 'Interested', dimension: 'PA', pregunta: 'Do you feel interested?' },
+  { numero: 2, emocion: 'Distressed', dimension: 'NA', pregunta: 'Do you feel distressed?' },
+  { numero: 3, emocion: 'Excited', dimension: 'PA', pregunta: 'Do you feel excited?' },
+  { numero: 4, emocion: 'Upset', dimension: 'NA', pregunta: 'Do you feel upset?' },
+  { numero: 5, emocion: 'Strong', dimension: 'PA', pregunta: 'Do you feel strong?' },
+  { numero: 6, emocion: 'Guilty', dimension: 'NA', pregunta: 'Do you feel guilty?' },
+  { numero: 7, emocion: 'Enthusiastic', dimension: 'PA', pregunta: 'Do you feel enthusiastic?' },
+  { numero: 8, emocion: 'Scared', dimension: 'NA', pregunta: 'Do you feel scared?' },
+  { numero: 9, emocion: 'Proud', dimension: 'PA', pregunta: 'Do you feel proud?' },
+  { numero: 10, emocion: 'Hostile', dimension: 'NA', pregunta: 'Do you feel hostile?' },
+  { numero: 11, emocion: 'Alert', dimension: 'PA', pregunta: 'Do you feel alert?' },
+  { numero: 12, emocion: 'Irritable', dimension: 'NA', pregunta: 'Do you feel irritable?' },
+  { numero: 13, emocion: 'Inspired', dimension: 'PA', pregunta: 'Do you feel inspired?' },
+  { numero: 14, emocion: 'Ashamed', dimension: 'NA', pregunta: 'Do you feel ashamed?' },
+  { numero: 15, emocion: 'Determined', dimension: 'PA', pregunta: 'Do you feel determined?' },
+  { numero: 16, emocion: 'Nervous', dimension: 'NA', pregunta: 'Do you feel nervous?' },
+  { numero: 17, emocion: 'Attentive', dimension: 'PA', pregunta: 'Do you feel attentive?' },
+  { numero: 18, emocion: 'Jittery', dimension: 'NA', pregunta: 'Do you feel jittery or restless?' },
+  { numero: 19, emocion: 'Active', dimension: 'PA', pregunta: 'Do you feel active?' },
+  { numero: 20, emocion: 'Afraid', dimension: 'NA', pregunta: 'Do you feel afraid?' },
 ];
 
 const OPCIONES_LIKERT = [
-  { valor: 1, etiqueta: '1. Muy poco o nada' },
-  { valor: 2, etiqueta: '2. Un poco' },
-  { valor: 3, etiqueta: '3. Moderadamente' },
-  { valor: 4, etiqueta: '4. Bastante' },
-  { valor: 5, etiqueta: '5. Extremadamente' },
+  { valor: 1, etiqueta: '1. Very slightly or not at all' },
+  { valor: 2, etiqueta: '2. A little' },
+  { valor: 3, etiqueta: '3. Moderately' },
+  { valor: 4, etiqueta: '4. Quite a bit' },
+  { valor: 5, etiqueta: '5. Extremely' },
 ];
 
 export default function TestPANAS({
-  astronauta = { nombre: 'Cmdte. Alex Vega', tripulacion: 'Tripulación A' },
+  astronauta = { nombre: 'Cmdr. Alex Vega', tripulacion: 'Crew A' },
   onCambiarPestana,
   onVolver,
   onVolverTests,
@@ -84,7 +84,7 @@ export default function TestPANAS({
 
   const handleSiguienteOFinalizar = async () => {
     if (respuestaActual === null) {
-      setError('Por favor, seleccioná una opción antes de continuar.');
+      setError('Please select an option before continuing.');
       return;
     }
 
@@ -99,7 +99,7 @@ export default function TestPANAS({
       (r) => !Number.isInteger(r) || r < 1 || r > 5
     );
     if (indiceFaltante !== -1) {
-      setError(`Falta responder la pregunta ${indiceFaltante + 1}.`);
+      setError(`Question ${indiceFaltante + 1} needs to be answered.`);
       cambiarPasoConTransicion(indiceFaltante, 'atras');
       return;
     }
@@ -110,10 +110,10 @@ export default function TestPANAS({
       const data = await bioastroApi.analizarPANAS(respuestas);
       const resultado = data.resultado ?? data;
       setResultadoBackend(resultado);
-      setMensajeBackend(data.mensaje || 'PANAS calculado correctamente');
+      setMensajeBackend(data.mensaje || 'PANAS calculated successfully');
     } catch (err) {
       setError(
-        err.message || 'Ocurrió un error al procesar la evaluación en el servidor.'
+        err.message || 'An error occurred while processing the evaluation on the server.'
       );
     } finally {
       setEnviando(false);
@@ -134,9 +134,9 @@ export default function TestPANAS({
       <header className="px-6 sm:px-10 py-5 border-b border-slate-800/80 flex flex-wrap items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 text-xs md:text-sm font-mono tracking-wider">
-            <span className="font-bold text-slate-200">ROVER LUNAR</span>
+            <span className="font-bold text-slate-200">LUNAR ROVER</span>
             <span className="text-cyan-400 font-bold mx-1">//</span>
-            <span className="text-slate-300 font-normal">DÍA 42</span>
+            <span className="text-slate-300 font-normal">DAY 42</span>
           </div>
           <div className="text-xs text-slate-400 mt-1">
             {astronauta.nombre} · {astronauta.tripulacion}
@@ -149,7 +149,7 @@ export default function TestPANAS({
             onClick={() => (onCambiarPestana ? onCambiarPestana('inicio') : onVolver && onVolver())}
             className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
-            Inicio
+            Home
           </button>
 
           <button
@@ -157,7 +157,7 @@ export default function TestPANAS({
             onClick={() => (onVolverTests ? onVolverTests() : onCambiarPestana && onCambiarPestana('tests'))}
             className="px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold tracking-wide bg-[#0d342f] text-[#34d399] border border-emerald-500/30 shadow-[0_0_15px_rgba(52,211,153,0.15)] cursor-pointer select-none"
           >
-            Bienestar y Tests
+            Wellness & Tests
           </button>
 
           <button
@@ -165,7 +165,7 @@ export default function TestPANAS({
             onClick={() => onCambiarPestana && onCambiarPestana('test_orina')}
             className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
-            Test Orina
+            Urine Test
           </button>
 
           <button
@@ -173,7 +173,7 @@ export default function TestPANAS({
             onClick={() => onCambiarPestana && onCambiarPestana('test_pvc')}
             className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
-            Test PVC
+            CVP Test
           </button>
 
           <button
@@ -181,7 +181,7 @@ export default function TestPANAS({
             onClick={() => onCambiarPestana && onCambiarPestana('test_qus')}
             className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
-            Test QUS
+            QUS Test
           </button>
         </nav>
       </header>
@@ -192,21 +192,21 @@ export default function TestPANAS({
         <div className="flex flex-col sm:flex-row items-start sm:items-start justify-between gap-4 mb-7">
           <div className="max-w-3xl">
             <h1 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
-              Estado Emocional — PANAS
+              Emotional State — PANAS
             </h1>
             <p className="text-[#a8c4d5] mt-2 text-base sm:text-lg leading-relaxed">
-              Las siguientes palabras describen diferentes sentimientos y emociones. Indicá en qué medida experimentás cada una de ellas en este preciso momento.
+              The following words describe different feelings and emotions. Indicate to what extent you experience each one at this exact moment.
             </p>
           </div>
 
           <div className="flex flex-col items-start sm:items-end gap-2.5 flex-shrink-0">
             <div className="bg-[#102a26] text-[#2ee59d] border border-[#2ee59d]/25 px-5 py-2 rounded-full text-xs sm:text-sm font-medium flex items-center gap-2.5 shadow-sm">
               <span className="w-2 h-2 rounded-full bg-[#2ee59d] shadow-[0_0_8px_#2ee59d] animate-pulse"></span>
-              <span>Todo en orden a bordo</span>
+              <span>All systems nominal on board</span>
             </div>
             {!resultadoBackend && (
               <span className="text-sm sm:text-base text-[#a8c4d5] font-medium pr-1">
-                Pregunta {pasoActual + 1} de {totalPreguntas}
+                Question {pasoActual + 1} of {totalPreguntas}
               </span>
             )}
           </div>
@@ -236,7 +236,7 @@ export default function TestPANAS({
               {/* PREGUNTA ACTUAL */}
               <div className="mb-8">
                 <span className="text-xs font-mono uppercase tracking-wider text-[#57d9ed] block mb-1.5">
-                  Ítem {itemActual.numero} · Emoción: {itemActual.emocion}
+                  Item {itemActual.numero} · Emotion: {itemActual.emocion}
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
                   {itemActual.numero}. {itemActual.pregunta}
@@ -281,7 +281,7 @@ export default function TestPANAS({
                 onClick={handleAnterior}
                 className="w-full py-3.5 px-6 rounded-full border border-[#4b6a88]/70 bg-transparent hover:bg-slate-800/50 text-[#a8c4d5] hover:text-white font-medium text-base transition-all cursor-pointer disabled:opacity-50"
               >
-                Anterior
+                Previous
               </button>
 
               <button
@@ -291,12 +291,12 @@ export default function TestPANAS({
                 className="w-full py-3.5 px-6 rounded-full bg-[#2ee59d] hover:bg-[#3df2aa] active:scale-[0.99] text-[#062018] font-bold text-base flex items-center justify-center gap-2 shadow-[0_0_22px_rgba(46,229,157,0.25)] transition-all cursor-pointer disabled:opacity-60"
               >
                 {enviando ? (
-                  <span>Procesando evaluación...</span>
+                  <span>Processing evaluation...</span>
                 ) : esUltimaPregunta ? (
-                  <span>Finalizar evaluación</span>
+                  <span>Finish evaluation</span>
                 ) : (
                   <>
-                    <span>Siguiente</span>
+                    <span>Next</span>
                     <svg
                       className="w-4 h-4"
                       fill="none"
@@ -321,15 +321,15 @@ export default function TestPANAS({
                   ✓ {mensajeBackend}
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-bold text-white mt-1">
-                  Resultados de Estado Emocional (PANAS)
+                  Emotional State Results (PANAS)
                 </h2>
                 <p className="text-sm text-[#a8c4d5] mt-1">
-                  Las dimensiones de Afecto Positivo (PA) y Afecto Negativo (NA) se reportan de manera independiente (escala de 10 a 50).
+                  Positive Affect (PA) and Negative Affect (NA) dimensions are reported independently (scale 10 to 50).
                 </p>
               </div>
 
               <span className="px-4 py-1.5 rounded-full bg-[#0d1c2b] border border-slate-700 text-xs font-mono text-[#57d9ed]">
-                20 respuestas procesadas
+                20 responses processed
               </span>
             </div>
 
@@ -341,10 +341,10 @@ export default function TestPANAS({
                   <div className="flex items-center justify-between">
                     <div>
                       <span className="text-xs font-mono uppercase tracking-wider text-[#2ee59d]">
-                        Dimensión Independiente
+                        Independent Dimension
                       </span>
                       <h3 className="text-xl font-bold text-white mt-0.5">
-                        Afecto Positivo (PA)
+                        Positive Affect (PA)
                       </h3>
                     </div>
                     <div className="text-right">
@@ -358,9 +358,9 @@ export default function TestPANAS({
                   {/* Barra visual para PA */}
                   <div className="mt-6">
                     <div className="flex justify-between text-xs text-[#a8c4d5] mb-2">
-                      <span>Rango: 10 – 50</span>
+                      <span>Range: 10 – 50</span>
                       <span>
-                        Normalizado: {Number(resultadoBackend.paNormalizado).toFixed(2)} (
+                        Normalized: {Number(resultadoBackend.paNormalizado).toFixed(2)} (
                         {Math.round(Number(resultadoBackend.paNormalizado) * 100)}%)
                       </span>
                     </div>
@@ -379,7 +379,7 @@ export default function TestPANAS({
                 </div>
 
                 <p className="text-xs sm:text-sm text-[#a8c4d5] mt-5 leading-relaxed">
-                  Refleja el nivel de energía, entusiasmo, concentración y disposición activa reportado en este momento de la misión.
+                  Reflects the level of energy, enthusiasm, focus, and active engagement reported at this moment in the mission.
                 </p>
               </div>
 
@@ -389,10 +389,10 @@ export default function TestPANAS({
                   <div className="flex items-center justify-between">
                     <div>
                       <span className="text-xs font-mono uppercase tracking-wider text-[#57d9ed]">
-                        Dimensión Independiente
+                        Independent Dimension
                       </span>
                       <h3 className="text-xl font-bold text-white mt-0.5">
-                        Afecto Negativo (NA)
+                        Negative Affect (NA)
                       </h3>
                     </div>
                     <div className="text-right">
@@ -406,9 +406,9 @@ export default function TestPANAS({
                   {/* Barra visual para NA */}
                   <div className="mt-6">
                     <div className="flex justify-between text-xs text-[#a8c4d5] mb-2">
-                      <span>Rango: 10 – 50</span>
+                      <span>Range: 10 – 50</span>
                       <span>
-                        Normalizado: {Number(resultadoBackend.naNormalizado).toFixed(2)} (
+                        Normalized: {Number(resultadoBackend.naNormalizado).toFixed(2)} (
                         {Math.round(Number(resultadoBackend.naNormalizado) * 100)}%)
                       </span>
                     </div>
@@ -427,15 +427,15 @@ export default function TestPANAS({
                 </div>
 
                 <p className="text-xs sm:text-sm text-[#a8c4d5] mt-5 leading-relaxed">
-                  Refleja el nivel de tensión subjetiva, inquietud o desgaste emocional registrado en este momento posterior o previo a actividad.
+                  Reflects the level of subjective tension, restlessness, or emotional wear recorded at this moment before or after activity.
                 </p>
               </div>
             </div>
 
             {/* Nota informativa no diagnóstica */}
             <div className="p-4 rounded-2xl bg-[#0d1c2b]/80 border border-slate-800 text-xs sm:text-sm text-[#a8c4d5]">
-              <strong className="text-[#57d9ed]">Registro de seguimiento BioAstro:</strong>{' '}
-              Estos indicadores representan una lectura puntual de autopercepción emocional y no constituyen un diagnóstico clínico ni una clasificación de aptitud médica.
+              <strong className="text-[#57d9ed]">BioAstro tracking log:</strong>{' '}
+              These indicators represent a punctual reading of emotional self-perception and do not constitute a clinical diagnosis or medical fitness classification.
             </div>
 
             {/* Botones de acción al finalizar */}
@@ -445,7 +445,7 @@ export default function TestPANAS({
                 onClick={reiniciarTest}
                 className="w-full py-3.5 px-5 rounded-full border border-[#4b6a88]/70 text-[#a8c4d5] hover:text-white hover:bg-slate-800/50 font-medium text-sm sm:text-base transition-all cursor-pointer"
               >
-                Realizar nuevo registro
+                Perform new entry
               </button>
 
               {onVolverTests && (
@@ -454,7 +454,7 @@ export default function TestPANAS({
                   onClick={onVolverTests}
                   className="w-full py-3.5 px-5 rounded-full border border-[#2ee59d]/50 bg-[#112e2b] hover:bg-[#163d39] text-[#2ee59d] font-semibold text-sm sm:text-base transition-all cursor-pointer"
                 >
-                  Volver a Evaluaciones
+                  Back to Evaluations
                 </button>
               )}
 
@@ -463,7 +463,7 @@ export default function TestPANAS({
                 onClick={() => (onVolver ? onVolver() : onVolverTests && onVolverTests())}
                 className="w-full py-3.5 px-5 rounded-full bg-[#2ee59d] hover:bg-[#3df2aa] text-[#062018] font-bold text-sm sm:text-base shadow-[0_0_20px_rgba(46,229,157,0.25)] transition-all cursor-pointer"
               >
-                Volver al inicio
+                Back to Home
               </button>
             </div>
           </div>
@@ -474,10 +474,10 @@ export default function TestPANAS({
       <footer className="w-full px-6 sm:px-10 py-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm">
         <div className="flex items-center gap-2 text-[#4d8ec4]">
           <span className="w-2 h-2 rounded-full bg-[#3b9eff]"></span>
-          <span>Datos encriptados y listos para envío</span>
+          <span>Data encrypted and ready for transmission</span>
         </div>
         <div className="text-[#8ba3b8]">
-          Tu bienestar también es parte de la misión.
+          Your wellness is also part of the mission.
         </div>
       </footer>
     </div>

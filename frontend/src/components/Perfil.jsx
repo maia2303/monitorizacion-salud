@@ -22,9 +22,9 @@ export default function Perfil({ onIniciarSesion }) {
     {
       id: 'grace',
       nombre: 'Grace K. Wilson',
-      cargo: 'Comandante',
+      cargo: 'Commander',
       cargoColor: 'text-cyan-400',
-      badge: `Meta diaria: ${metaGrace}%`,
+      badge: `Daily goal: ${metaGrace}%`,
       badgeColor: 'bg-[#0a2723] text-emerald-400 border-emerald-500/30',
       dotColor: 'bg-emerald-400',
       onBadgeClick: () => setMetaGrace((prev) => (prev >= 100 ? 60 : prev + 10)),
@@ -32,9 +32,9 @@ export default function Perfil({ onIniciarSesion }) {
     {
       id: 'rocky',
       nombre: 'Rocky C. Mendoza',
-      cargo: 'Piloto',
+      cargo: 'Pilot',
       cargoColor: 'text-sky-400',
-      badge: checkRocky ? 'Check semanal completado ✓' : 'Check semanal pendiente',
+      badge: checkRocky ? 'Weekly check completed ✓' : 'Pending weekly check',
       badgeColor: checkRocky
         ? 'bg-[#0a2723] text-emerald-400 border-emerald-500/30'
         : 'bg-[#292011] text-amber-400 border-amber-500/30',
@@ -46,7 +46,7 @@ export default function Perfil({ onIniciarSesion }) {
   const handleIngresar = (tripulanteId) => {
     setPerfilSeleccionado(tripulanteId);
     const nombre = tripulanteId === 'grace' ? 'Grace K. Wilson' : 'Rocky C. Mendoza';
-    setNotificacionNFC(`Autenticando credencial de ${nombre}...`);
+    setNotificacionNFC(`Authenticating credential for ${nombre}...`);
     
     setTimeout(() => {
       setNotificacionNFC('');
@@ -59,7 +59,7 @@ export default function Perfil({ onIniciarSesion }) {
   const simularNFC = () => {
     const alternar = perfilSeleccionado === 'grace' ? 'rocky' : 'grace';
     const nombre = alternar === 'grace' ? 'Grace K. Wilson' : 'Rocky C. Mendoza';
-    setNotificacionNFC(`🛰️ Tarjeta NFC detectada: Accediendo como ${nombre}...`);
+    setNotificacionNFC(`🛰️ NFC card detected: Accessing as ${nombre}...`);
     
     setTimeout(() => {
       setPerfilSeleccionado(alternar);
@@ -79,15 +79,15 @@ export default function Perfil({ onIniciarSesion }) {
       {/* HEADER SUPERIOR SIN NAVBAR (SOLO INFORMACIÓN DE MISIÓN) */}
       <header className="px-6 sm:px-10 py-5 border-b border-slate-800/80 flex flex-wrap items-center justify-between gap-4 text-xs md:text-sm font-mono tracking-wider text-slate-400">
         <div className="flex items-center gap-2">
-          <span className="font-bold text-slate-200 tracking-wider">ROVER LUNAR</span>
+          <span className="font-bold text-slate-200 tracking-wider">LUNAR ROVER</span>
           <span className="text-cyan-400 font-bold mx-1">//</span>
-          <span className="text-slate-300">DÍA DE MISIÓN 42</span>
+          <span className="text-slate-300">MISSION DAY 42</span>
         </div>
 
         {/* Indicador de sistemas en línea */}
         <div className="flex items-center gap-2">
           <span className="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399] animate-pulse"></span>
-          <span className="text-slate-300 font-medium">Sistemas Nominales • 1/6 G • En línea</span>
+          <span className="text-slate-300 font-medium">Nominal Systems • 1/6 G • Online</span>
         </div>
       </header>
 
@@ -105,10 +105,10 @@ export default function Perfil({ onIniciarSesion }) {
         {/* Título y subtítulo */}
         <div className="text-center max-w-2xl mx-auto mb-10">
           <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Selecciona tu perfil para comenzar
+            Select your profile to begin
           </h1>
           <p className="text-slate-400 mt-3 text-sm sm:text-base font-normal">
-            Tus métricas de salud son privadas y se sincronizan automáticamente
+            Your health metrics are private and automatically synchronized
           </p>
         </div>
 
@@ -130,7 +130,7 @@ export default function Perfil({ onIniciarSesion }) {
                 <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden mb-5 bg-[#1b253b] ring-4 ring-slate-800/80 shadow-inner flex items-center justify-center transition-transform group-hover:scale-105">
                   <img
                     src="/Avatar ilustrado · Rocky C. Mendoza.svg"
-                    alt={`Avatar de ${tripulante.nombre}`}
+                    alt={`Avatar of ${tripulante.nombre}`}
                     className="w-full h-full object-cover select-none pointer-events-none"
                     onError={(e) => {
                       // Fallback en caso de incompatibilidad con espacios en URL
@@ -154,7 +154,7 @@ export default function Perfil({ onIniciarSesion }) {
                     e.stopPropagation();
                     tripulante.onBadgeClick();
                   }}
-                  title="Click para alternar estado"
+                  title="Click to toggle status"
                   className={`mt-4 border text-xs px-4 py-1.5 rounded-full flex items-center gap-2 font-medium transition-colors cursor-pointer select-none ${tripulante.badgeColor}`}
                 >
                   <span className={`w-2 h-2 rounded-full ${tripulante.dotColor} animate-pulse`}></span>
@@ -170,7 +170,7 @@ export default function Perfil({ onIniciarSesion }) {
                   }}
                   className="w-full mt-7 bg-[#10b981] hover:bg-[#34d399] active:bg-[#059669] text-[#062018] font-bold text-base py-3 px-6 rounded-xl flex items-center justify-center gap-2.5 transition-all duration-200 transform group-hover:shadow-[0_0_20px_rgba(16,185,129,0.35)] cursor-pointer"
                 >
-                  <span>Ingresar</span>
+                  <span>Enter</span>
                   <svg
                     className="w-5 h-5 transition-transform group-hover:translate-x-1"
                     fill="none"
@@ -199,7 +199,7 @@ export default function Perfil({ onIniciarSesion }) {
         <div
           onClick={simularNFC}
           className="flex items-center gap-3 cursor-pointer group hover:text-slate-200 transition-colors select-none"
-          title="Toca para simular acceso con tarjeta NFC"
+          title="Tap to simulate NFC card access"
         >
           <div className="w-8 h-8 rounded-lg bg-sky-950/60 border border-sky-500/30 flex items-center justify-center text-sky-400 group-hover:border-sky-400 group-hover:shadow-[0_0_12px_rgba(56,189,248,0.3)] transition-all">
             <svg
@@ -217,7 +217,7 @@ export default function Perfil({ onIniciarSesion }) {
             </svg>
           </div>
           <span className="font-normal text-slate-300 group-hover:text-cyan-300 transition-colors">
-            Acerca tu credencial NFC o toca tu tarjeta para acceder
+            Hold your NFC credential or tap your card to access
           </span>
         </div>
 
@@ -241,7 +241,7 @@ export default function Perfil({ onIniciarSesion }) {
             />
             <circle cx="12" cy="12" r="3" />
           </svg>
-          <span>Simular Telemetría</span>
+          <span>Simulate Telemetry</span>
         </button>
       </footer>
 
@@ -250,7 +250,7 @@ export default function Perfil({ onIniciarSesion }) {
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-[#131d2e] border border-slate-700 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl">
             <div className="flex items-center justify-between pb-4 border-b border-slate-800">
-              <h3 className="text-lg font-bold text-white">Simulador de Sensores Rover</h3>
+              <h3 className="text-lg font-bold text-white">Rover Sensor Simulator</h3>
               <button
                 type="button"
                 onClick={() => setMostrarModalTelemetria(false)}
@@ -268,7 +268,7 @@ export default function Perfil({ onIniciarSesion }) {
                   onChange={() => toggleSensor('orina')}
                   className="w-4 h-4 rounded text-emerald-500 accent-emerald-500"
                 />
-                <span className="text-slate-200">Sensor de Tira Reactiva de Orina (Biomarcadores)</span>
+                <span className="text-slate-200">Urine Test Strip Sensor (Biomarkers)</span>
               </label>
 
               <label className="flex items-center gap-3 p-3 rounded-xl bg-slate-800/40 border border-slate-700 cursor-pointer">
@@ -278,7 +278,7 @@ export default function Perfil({ onIniciarSesion }) {
                   onChange={() => toggleSensor('pvc')}
                   className="w-4 h-4 rounded text-sky-500 accent-sky-500"
                 />
-                <span className="text-slate-200">Sensor Test PVC (Hemodinámica)</span>
+                <span className="text-slate-200">CVP Test Sensor (Hemodynamics)</span>
               </label>
 
               <label className="flex items-center gap-3 p-3 rounded-xl bg-slate-800/40 border border-slate-700 cursor-pointer">
@@ -288,7 +288,7 @@ export default function Perfil({ onIniciarSesion }) {
                   onChange={() => toggleSensor('qus')}
                   className="w-4 h-4 rounded text-cyan-500 accent-cyan-500"
                 />
-                <span className="text-slate-200">Sensor Test QUS (Ultrasonido de Calcáneo)</span>
+                <span className="text-slate-200">QUS Test Sensor (Calcaneus Ultrasound)</span>
               </label>
 
               <label className="flex items-center gap-3 p-3 rounded-xl bg-slate-800/40 border border-slate-700 cursor-pointer">
@@ -298,7 +298,7 @@ export default function Perfil({ onIniciarSesion }) {
                   onChange={() => toggleSensor('gravedad')}
                   className="w-4 h-4 rounded text-teal-500 accent-teal-500"
                 />
-                <span className="text-slate-200">Acelerómetro de Cabina (1/6 G)</span>
+                <span className="text-slate-200">Cabin Accelerometer (1/6 G)</span>
               </label>
             </div>
 
@@ -308,7 +308,7 @@ export default function Perfil({ onIniciarSesion }) {
                 onClick={() => setMostrarModalTelemetria(false)}
                 className="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold cursor-pointer"
               >
-                Cerrar
+                Close
               </button>
             </div>
           </div>

@@ -2,11 +2,11 @@ import React from 'react';
 import { GraceAvatar, RockyAvatar } from './AstronautAvatars';
 
 const PESTAÑAS = [
-  { id: 'inicio', label: 'Inicio', icon: '🚀' },
-  { id: 'tests', label: 'Bienestar y Tests', icon: '🧠' },
-  { id: 'test_orina', label: 'Test Orina', icon: '🧪' },
-  { id: 'test_pvc', label: 'Test PVC', icon: '🫀' },
-  { id: 'test_qus', label: 'Test QUS', icon: '🦴' },
+  { id: 'inicio', label: 'Home', icon: '🚀' },
+  { id: 'tests', label: 'Wellness & Tests', icon: '🧠' },
+  { id: 'test_orina', label: 'Urine Test', icon: '🧪' },
+  { id: 'test_pvc', label: 'CVP Test', icon: '🫀' },
+  { id: 'test_qus', label: 'QUS Test', icon: '🦴' },
 ];
 
 export default function Navbar({
@@ -20,7 +20,7 @@ export default function Navbar({
       <div className="max-w-7xl mx-auto px-4 sm:px-8 py-3.5">
         <div className="flex flex-wrap items-center justify-between gap-4">
           
-          {/* LADO IZQUIERDO: ROVER LUNAR // DÍA DE MISIÓN 42 */}
+          {/* LADO IZQUIERDO: LUNAR ROVER // MISSION DAY 42 */}
           <div className="flex items-center gap-2 text-xs md:text-sm font-mono tracking-wider">
             <button
               type="button"
@@ -28,16 +28,16 @@ export default function Navbar({
               className="flex items-center gap-2 text-left cursor-pointer group focus:outline-none"
             >
               <span className="font-bold text-slate-200 group-hover:text-white transition-colors">
-                ROVER LUNAR
+                LUNAR ROVER
               </span>
               <span className="text-cyan-400 font-bold mx-1">//</span>
               <span className="text-slate-300 font-normal">
-                DÍA 42
+                DAY 42
               </span>
             </button>
           </div>
 
-          {/* NAVBAR CENTRAL: Inicio / Test Orina / Test PVC / Test QUS */}
+          {/* NAVBAR CENTRAL: Home / Urine Test / CVP Test / QUS Test */}
           <nav className="flex items-center gap-1 sm:gap-2 bg-slate-900/80 border border-slate-800/90 rounded-2xl p-1 shadow-inner">
             {PESTAÑAS.map((pestana) => {
               const estaActiva = pestanaActiva === pestana.id;
@@ -66,7 +66,7 @@ export default function Navbar({
                 <button
                   type="button"
                   onClick={() => setPerfilActivo('grace')}
-                  title="Seleccionar Grace K. Wilson"
+                  title="Select Grace K. Wilson"
                   className={`flex items-center gap-1.5 px-2 py-1 rounded-lg text-xs transition-all cursor-pointer ${
                     perfilActivo === 'grace'
                       ? 'bg-emerald-500/20 text-emerald-300 font-semibold border border-emerald-500/30'
@@ -82,7 +82,7 @@ export default function Navbar({
                 <button
                   type="button"
                   onClick={() => setPerfilActivo('rocky')}
-                  title="Seleccionar Rocky C. Mendoza"
+                  title="Select Rocky C. Mendoza"
                   className={`flex items-center gap-1.5 px-2 py-1 rounded-lg text-xs transition-all cursor-pointer ${
                     perfilActivo === 'rocky'
                       ? 'bg-sky-500/20 text-sky-300 font-semibold border border-sky-500/30'
@@ -97,10 +97,10 @@ export default function Navbar({
               </div>
             )}
 
-            {/* Sistemas Nominales • 1/6 G • En línea */}
+            {/* Systems Nominal • 1/6 G • Online */}
             <div className="flex items-center gap-2 text-xs text-slate-300 font-mono tracking-wide">
               <span className="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399] animate-pulse"></span>
-              <span className="hidden sm:inline">1/6 G • En línea</span>
+              <span className="hidden sm:inline">1/6 G • Online</span>
             </div>
           </div>
 

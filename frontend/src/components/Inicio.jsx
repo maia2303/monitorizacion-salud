@@ -13,8 +13,8 @@ export default function Inicio() {
     <ActividadDiaria
       astronauta={
         autenticado === 'grace'
-          ? { nombre: 'Cmdte. Grace K. Wilson', tripulacion: 'Tripulación A' }
-          : { nombre: 'Piloto Rocky C. Mendoza', tripulacion: 'Tripulación A' }
+          ? { nombre: 'Cmdr. Grace K. Wilson', tripulacion: 'Crew A' }
+          : { nombre: 'Pilot Rocky C. Mendoza', tripulacion: 'Crew A' }
       }
     />
   );

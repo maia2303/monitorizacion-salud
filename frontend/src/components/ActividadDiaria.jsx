@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const OPCIONES_HORAS = ['0–1 h', '1–2 h', '2–3 h', '3–4 h'];
 
 export default function ActividadDiaria({
-  astronauta = { nombre: 'Cmdte. Alex Vega', tripulacion: 'Tripulación A' },
+  astronauta = { nombre: 'Cmdr. Alex Vega', tripulacion: 'Crew A' },
   onCambiarPestana,
 }) {
   // Valores seleccionados para cada tipo de actividad
@@ -40,12 +40,12 @@ export default function ActividadDiaria({
   // Mensaje adaptativo según el ejercicio de resistencia
   const getMensajeCuidado = () => {
     if (ejercicioResistencia === '3–4 h' || ejercicioResistencia === '2–3 h') {
-      return '¡Excelente esfuerzo hoy! Has completado el estímulo mecánico necesario para proteger tu densidad ósea en 1/6 G.';
+      return 'Excellent effort today! You have completed the mechanical stimulation needed to protect your bone density in 1/6 G.';
     }
     if (ejercicioResistencia === '1–2 h') {
-      return 'Buen ritmo hoy. Solo faltan 30 min de resistencia para proteger tus huesos y completar el día.';
+      return 'Great pace today. Only 30 min of resistance exercise needed to protect your bone density and finish the day.';
     }
-    return 'Carga ósea baja registrada. Recuerda realizar al menos 30 min con las bandas de tracción antes de descansar.';
+    return 'Low bone load recorded. Remember to perform at least 30 min with resistance bands before resting.';
   };
 
   return (
@@ -53,12 +53,12 @@ export default function ActividadDiaria({
       
       {/* HEADER SUPERIOR CON NAVBAR INTEGRADO EXACTAMENTE COMO LA IMAGEN */}
       <header className="px-6 sm:px-10 py-5 border-b border-slate-800/80 flex flex-wrap items-center justify-between gap-4">
-        {/* Lado izquierdo: ROVER LUNAR // DÍA 42 y Comandante */}
+        {/* Lado izquierdo: LUNAR ROVER // DAY 42 */}
         <div>
           <div className="flex items-center gap-2 text-xs md:text-sm font-mono tracking-wider">
-            <span className="font-bold text-slate-200">ROVER LUNAR</span>
+            <span className="font-bold text-slate-200">LUNAR ROVER</span>
             <span className="text-cyan-400 font-bold mx-1">//</span>
-            <span className="text-slate-300 font-normal">DÍA 42</span>
+            <span className="text-slate-300 font-normal">DAY 42</span>
           </div>
           <div className="text-xs text-slate-400 mt-1">
             {astronauta.nombre} · {astronauta.tripulacion}
@@ -71,7 +71,7 @@ export default function ActividadDiaria({
             type="button"
             className="px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold tracking-wide bg-[#0d342f] text-[#34d399] border border-emerald-500/30 shadow-[0_0_15px_rgba(52,211,153,0.15)] cursor-pointer select-none"
           >
-            Inicio
+            Home
           </button>
 
           <button
@@ -79,7 +79,7 @@ export default function ActividadDiaria({
             onClick={() => onCambiarPestana && onCambiarPestana('tests')}
             className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
-            Bienestar y Tests
+            Wellness & Tests
           </button>
           
           <button
@@ -87,7 +87,7 @@ export default function ActividadDiaria({
             onClick={() => onCambiarPestana && onCambiarPestana('test_orina')}
             className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
-            Test Orina
+            Urine Test
           </button>
 
           <button
@@ -95,7 +95,7 @@ export default function ActividadDiaria({
             onClick={() => onCambiarPestana && onCambiarPestana('test_pvc')}
             className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
-            Test PVC
+            CVP Test
           </button>
 
           <button
@@ -103,7 +103,7 @@ export default function ActividadDiaria({
             onClick={() => onCambiarPestana && onCambiarPestana('test_qus')}
             className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
-            Test QUS
+            QUS Test
           </button>
         </nav>
       </header>
@@ -115,16 +115,16 @@ export default function ActividadDiaria({
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
           <div>
             <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              Un paso más, a tu ritmo.
+              One step further, at your pace.
             </h1>
             <p className="text-slate-400 mt-2 text-sm sm:text-base">
-              Tu bienestar también es parte de la misión.
+              Your wellness is also part of the mission.
             </p>
           </div>
 
           <div className="bg-[#0e2a24]/90 text-emerald-400 border border-emerald-500/30 px-4 py-2 rounded-full text-xs sm:text-sm font-medium flex items-center gap-2.5 shadow-sm">
             <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] animate-pulse"></span>
-            <span>Todo en orden a bordo</span>
+            <span>All systems nominal on board</span>
           </div>
         </div>
 
@@ -137,10 +137,10 @@ export default function ActividadDiaria({
             <div className="flex items-start justify-between">
               <div>
                 <h2 className="text-xl sm:text-2xl font-bold text-white tracking-wide">
-                  Cada paso cuenta
+                  Every step counts
                 </h2>
                 <p className="text-slate-400 text-xs sm:text-sm mt-1">
-                  Tu recorrido de bienestar de hoy
+                  Your wellness journey today
                 </p>
               </div>
               <div className="text-3xl sm:text-4xl font-black text-[#34d399] font-mono">
@@ -152,7 +152,7 @@ export default function ActividadDiaria({
             <div className="my-6 rounded-2xl overflow-hidden bg-[#1e293b]/70 border border-slate-700/50 flex items-center justify-center p-2">
               <img
                 src="/avatar.svg"
-                alt="Astronauta en la Luna"
+                alt="Astronaut on the Moon"
                 className="w-full h-auto max-h-60 object-contain rounded-xl select-none pointer-events-none"
               />
             </div>
@@ -160,9 +160,9 @@ export default function ActividadDiaria({
             {/* Barra de Progreso y Meta diaria */}
             <div>
               <div className="flex items-center justify-between text-xs mb-2">
-                <span className="text-slate-400">de la meta diaria</span>
+                <span className="text-slate-400">of daily goal</span>
                 <span className="text-[#34d399] font-semibold">
-                  {progreso >= 75 ? 'Vas por buen camino' : 'Registrando jornada...'}
+                  {progreso >= 75 ? "You're on track" : 'Logging day...'}
                 </span>
               </div>
 
@@ -176,8 +176,8 @@ export default function ActividadDiaria({
 
               {/* Sub-etiquetas de inicio y meta */}
               <div className="flex items-center justify-between text-[11px] text-slate-500 mt-2 font-mono">
-                <span>Inicio del día</span>
-                <span>Meta diaria</span>
+                <span>Start of day</span>
+                <span>Daily goal</span>
               </div>
             </div>
           </div>
@@ -189,10 +189,10 @@ export default function ActividadDiaria({
             <div className="bg-[#131d2e] border border-slate-800/90 rounded-3xl p-6 sm:p-8 shadow-2xl">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-xl sm:text-2xl font-bold text-white tracking-wide">
-                  Actividad Diaria
+                  Daily Activity
                 </h2>
                 <span className="bg-slate-800/80 text-slate-400 text-xs px-3.5 py-1 rounded-full border border-slate-700/60 font-medium">
-                  Horas por día
+                  Hours per day
                 </span>
               </div>
 
@@ -203,7 +203,7 @@ export default function ActividadDiaria({
                 <div className="relative">
                   <div className="flex items-center justify-between py-2 border-b border-slate-800/60">
                     <span className="text-slate-300 text-sm sm:text-base font-normal">
-                      Horas de manejo de rover.
+                      Rover driving hours.
                     </span>
 
                     {/* Botón desplegable */}
@@ -258,7 +258,7 @@ export default function ActividadDiaria({
                 <div className="relative">
                   <div className="flex items-center justify-between py-2 border-b border-slate-800/60">
                     <span className="text-slate-300 text-sm sm:text-base font-normal">
-                      Horas de caminata lunar (EVA).
+                      Lunar EVA walk hours.
                     </span>
 
                     <button
@@ -311,7 +311,7 @@ export default function ActividadDiaria({
                 <div className="relative">
                   <div className="flex items-center justify-between py-2">
                     <span className="text-slate-300 text-sm sm:text-base font-normal">
-                      Horas de ejercicio de resistencia.
+                      Resistance exercise hours.
                     </span>
 
                     <button
@@ -371,7 +371,7 @@ export default function ActividadDiaria({
               {/* Mensaje de cuidado */}
               <div>
                 <span className="text-[#38bdf8] text-xs font-bold tracking-wider uppercase block">
-                  ESTÁS CUIDANDO DE TI
+                  TAKING CARE OF YOURSELF
                 </span>
                 <p className="text-slate-100 text-base sm:text-lg font-medium leading-snug mt-2">
                   {getMensajeCuidado()}
@@ -383,10 +383,10 @@ export default function ActividadDiaria({
             <div className="bg-[#131d2e] border border-emerald-500/30 rounded-3xl p-6 sm:p-7 shadow-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
                 <span className="text-[#2ee59d] text-xs font-bold tracking-wider uppercase block">
-                  BIENESTAR Y EVALUACIÓN
+                  WELLNESS & EVALUATION
                 </span>
                 <p className="text-slate-200 text-sm sm:text-base font-medium mt-1">
-                  Registrá tu estado emocional (PANAS) y la calidad de tu descanso pre-rover.
+                  Log your emotional state (PANAS) and the quality of your pre-rover rest.
                 </p>
               </div>
               <button
@@ -394,7 +394,7 @@ export default function ActividadDiaria({
                 onClick={() => onCambiarPestana && onCambiarPestana('tests')}
                 className="bg-[#2ee59d] hover:bg-[#3df2aa] text-[#062018] font-bold text-xs sm:text-sm py-3 px-6 rounded-full shadow-[0_0_20px_rgba(46,229,157,0.25)] transition-all cursor-pointer whitespace-nowrap"
               >
-                Ir a Evaluaciones →
+                Go to Evaluations →
               </button>
             </div>
 
@@ -408,10 +408,10 @@ export default function ActividadDiaria({
       <footer className="px-6 sm:px-10 py-5 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400 bg-[#0a0f1c]/70">
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-          <span>Datos sincronizados · 14:32</span>
+          <span>Data synced · 14:32</span>
         </div>
         <div className="italic text-slate-400">
-          Respira. Tu ritmo también importa.
+          Breathe. Your pace matters too.
         </div>
       </footer>
 

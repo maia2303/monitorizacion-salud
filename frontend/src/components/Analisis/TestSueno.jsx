@@ -2,71 +2,71 @@ import React, { useState } from 'react';
 import { bioastroApi } from '../../services/bioastroApi';
 
 const OPCIONES_LATENCIA = [
-  { valor: 'MENOS_15', etiqueta: 'Menos de 15 minutos' },
-  { valor: '15_30', etiqueta: 'Entre 15 y 30 minutos' },
-  { valor: '30_60', etiqueta: 'Entre 30 y 60 minutos' },
-  { valor: 'MAS_60', etiqueta: 'Más de 60 minutos' },
+  { valor: 'MENOS_15', etiqueta: 'Less than 15 minutes' },
+  { valor: '15_30', etiqueta: 'Between 15 and 30 minutes' },
+  { valor: '30_60', etiqueta: 'Between 30 and 60 minutes' },
+  { valor: 'MAS_60', etiqueta: 'More than 60 minutes' },
 ];
 
 const OPCIONES_DESPERTARES = [
-  { modo: '0', etiqueta: 'Ninguna vez', valor: 0 },
-  { modo: '1', etiqueta: 'Una vez', valor: 1 },
-  { modo: '2', etiqueta: 'Dos veces', valor: 2 },
-  { modo: '3+', etiqueta: 'Tres o más veces', valor: 3 },
+  { modo: '0', etiqueta: 'None', valor: 0 },
+  { modo: '1', etiqueta: 'Once', valor: 1 },
+  { modo: '2', etiqueta: 'Twice', valor: 2 },
+  { modo: '3+', etiqueta: 'Three or more times', valor: 3 },
 ];
 
 const OPCIONES_MAS_30_MIN = [
-  { valor: true, etiqueta: 'Sí' },
+  { valor: true, etiqueta: 'Yes' },
   { valor: false, etiqueta: 'No' },
 ];
 
 const OPCIONES_CALIDAD_DESPERTAR = [
-  { valor: 'BIEN', etiqueta: 'Bien, descansado/a y despejado/a' },
-  { valor: 'REGULAR', etiqueta: 'Regular, algo cansado/a' },
-  { valor: 'CANSADO', etiqueta: 'Cansado/a, con sensación de pesadez' },
+  { valor: 'BIEN', etiqueta: 'Good, rested and refreshed' },
+  { valor: 'REGULAR', etiqueta: 'Fair, somewhat tired' },
+  { valor: 'CANSADO', etiqueta: 'Tired, feeling sluggish' },
 ];
 
 const OPCIONES_INTERRUPCIONES = [
-  { valor: 'RUIDO', etiqueta: 'Ruidos en el hábitat' },
-  { valor: 'TEMPERATURA', etiqueta: 'Temperatura incómoda' },
-  { valor: 'MENTE_ACTIVA', etiqueta: 'Pensamientos o preocupaciones' },
-  { valor: 'OTRO', etiqueta: 'Otro motivo' },
+  { valor: 'RUIDO', etiqueta: 'Habitat noises' },
+  { valor: 'TEMPERATURA', etiqueta: 'Uncomfortable temperature' },
+  { valor: 'MENTE_ACTIVA', etiqueta: 'Active mind / racing thoughts' },
+  { valor: 'OTRO', etiqueta: 'Other reason' },
 ];
 
 const OPCIONES_CAPACIDAD_ROVER = [
-  { valor: 'OPTIMA', etiqueta: 'Óptima: me siento muy preparado/a' },
-  { valor: 'ESTANDAR', etiqueta: 'Estándar: puedo realizar mis actividades habituales' },
-  { valor: 'COPILOTO', etiqueta: 'Preferiría realizar tareas de copiloto o apoyo' },
+  { valor: 'OPTIMA', etiqueta: 'Optimal: feeling very prepared' },
+  { valor: 'ESTANDAR', etiqueta: 'Standard: able to perform routine activities' },
+  { valor: 'COPILOTO', etiqueta: 'Prefer co-pilot or support tasks' },
 ];
 
 const ETIQUETAS_LATENCIA = {
-  MENOS_15: 'Menos de 15 minutos',
-  '15_30': 'Entre 15 y 30 minutos',
-  '30_60': 'Entre 30 y 60 minutos',
-  MAS_60: 'Más de 60 minutos',
+  MENOS_15: 'Less than 15 minutes',
+  '15_30': 'Between 15 and 30 minutes',
+  '30_60': 'Between 30 and 60 minutes',
+  MAS_60: 'More than 60 minutes',
 };
 
 const ETIQUETAS_CALIDAD = {
-  BIEN: 'Bien, descansado/a y despejado/a',
-  REGULAR: 'Regular, algo cansado/a',
-  CANSADO: 'Cansado/a, con sensación de pesadez',
+  BIEN: 'Good, rested and refreshed',
+  REGULAR: 'Fair, somewhat tired',
+  CANSADO: 'Tired, feeling sluggish',
 };
 
 const ETIQUETAS_INTERRUPCION = {
-  RUIDO: 'Ruidos en el hábitat',
-  TEMPERATURA: 'Temperatura incómoda',
-  MENTE_ACTIVA: 'Pensamientos o preocupaciones',
-  OTRO: 'Otro motivo',
+  RUIDO: 'Habitat noises',
+  TEMPERATURA: 'Uncomfortable temperature',
+  MENTE_ACTIVA: 'Active mind / racing thoughts',
+  OTRO: 'Other reason',
 };
 
 const ETIQUETAS_CAPACIDAD = {
-  OPTIMA: 'Óptima: me siento muy preparado/a',
-  ESTANDAR: 'Estándar: puedo realizar mis actividades habituales',
-  COPILOTO: 'Preferiría realizar tareas de copiloto o apoyo',
+  OPTIMA: 'Optimal: feeling very prepared',
+  ESTANDAR: 'Standard: able to perform routine activities',
+  COPILOTO: 'Prefer co-pilot or support tasks',
 };
 
 export default function TestSueno({
-  astronauta = { nombre: 'Cmdte. Alex Vega', tripulacion: 'Tripulación A' },
+  astronauta = { nombre: 'Cmdr. Alex Vega', tripulacion: 'Crew A' },
   onCambiarPestana,
   onVolver,
   onVolverTests,
@@ -146,7 +146,7 @@ export default function TestSueno({
 
   const validarPasoActual = () => {
     if (pasoActual === 0 && !latenciaSueno) {
-      return 'Seleccioná cuánto tiempo tardaste en quedarte dormido/a.';
+      return 'Select how long it took you to fall asleep.';
     }
     if (pasoActual === 1) {
       if (
@@ -156,20 +156,20 @@ export default function TestSueno({
         Number(cantidadDespertares) < 0 ||
         Number(cantidadDespertares) > 30
       ) {
-        return 'Indicá una cantidad válida de despertares (número entero entre 0 y 30).';
+        return 'Indicate a valid number of awakenings (integer between 0 and 30).';
       }
       if (modoDespertares === '3+' && Number(cantidadDespertares) < 3) {
-        return 'Para "Tres o más veces", especificá un número entre 3 y 30.';
+        return 'For "Three or more times", specify a number between 3 and 30.';
       }
     }
     if (pasoActual === 2 && typeof despiertoMas30Min !== 'boolean') {
-      return 'Indicá si estuviste despierto/a durante más de 30 minutos seguidos.';
+      return 'Indicate whether you were awake for more than 30 consecutive minutes.';
     }
     if (pasoActual === 3 && !calidadDespertar) {
-      return 'Seleccioná cómo te sentiste al despertar.';
+      return 'Select how you felt upon waking.';
     }
     if (pasoActual === 5 && !capacidadRover) {
-      return 'Seleccioná cómo percibís tu capacidad para realizar las actividades del rover hoy.';
+      return 'Select how you perceive your ability to perform rover activities today.';
     }
     return '';
   };
@@ -213,10 +213,10 @@ export default function TestSueno({
       const data = await bioastroApi.analizarSueno(payload);
       const resultado = data.resultado ?? data;
       setResultadoBackend(resultado);
-      setMensajeBackend(data.mensaje || 'Datos de sueño validados correctamente');
+      setMensajeBackend(data.mensaje || 'Sleep data validated successfully');
     } catch (err) {
       setError(
-        err.message || 'No se pudo procesar el registro de sueño en el servidor.'
+        err.message || 'Could not process sleep log on the server.'
       );
     } finally {
       setEnviando(false);
@@ -244,9 +244,9 @@ export default function TestSueno({
       <header className="px-6 sm:px-10 py-5 border-b border-slate-800/80 flex flex-wrap items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 text-xs md:text-sm font-mono tracking-wider">
-            <span className="font-bold text-slate-200">ROVER LUNAR</span>
+            <span className="font-bold text-slate-200">LUNAR ROVER</span>
             <span className="text-cyan-400 font-bold mx-1">//</span>
-            <span className="text-slate-300 font-normal">DÍA 42</span>
+            <span className="text-slate-300 font-normal">DAY 42</span>
           </div>
           <div className="text-xs text-slate-400 mt-1">
             {astronauta.nombre} · {astronauta.tripulacion}
@@ -259,7 +259,7 @@ export default function TestSueno({
             onClick={() => (onCambiarPestana ? onCambiarPestana('inicio') : onVolver && onVolver())}
             className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
-            Inicio
+            Home
           </button>
 
           <button
@@ -267,7 +267,7 @@ export default function TestSueno({
             onClick={() => (onVolverTests ? onVolverTests() : onCambiarPestana && onCambiarPestana('tests'))}
             className="px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold tracking-wide bg-[#0d342f] text-[#34d399] border border-emerald-500/30 shadow-[0_0_15px_rgba(52,211,153,0.15)] cursor-pointer select-none"
           >
-            Bienestar y Tests
+            Wellness & Tests
           </button>
 
           <button
@@ -275,7 +275,7 @@ export default function TestSueno({
             onClick={() => onCambiarPestana && onCambiarPestana('test_orina')}
             className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
-            Test Orina
+            Urine Test
           </button>
 
           <button
@@ -283,7 +283,7 @@ export default function TestSueno({
             onClick={() => onCambiarPestana && onCambiarPestana('test_pvc')}
             className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
-            Test PVC
+            CVP Test
           </button>
 
           <button
@@ -291,7 +291,7 @@ export default function TestSueno({
             onClick={() => onCambiarPestana && onCambiarPestana('test_qus')}
             className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
-            Test QUS
+            QUS Test
           </button>
         </nav>
       </header>
@@ -302,21 +302,21 @@ export default function TestSueno({
         <div className="flex flex-col sm:flex-row items-start sm:items-start justify-between gap-4 mb-7">
           <div className="max-w-3xl">
             <h1 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
-              Calidad del Sueño — Descanso Pre-Rover
+              Sleep Quality — Pre-Rover Rest
             </h1>
             <p className="text-[#a8c4d5] mt-2 text-base sm:text-lg leading-relaxed">
-              Antes de comenzar tu jornada, queremos conocer cómo fue tu descanso. Respondé las siguientes preguntas sobre tu última noche de sueño.
+              Before starting your workday, we want to know how your rest was. Answer the following questions about your last night of sleep.
             </p>
           </div>
 
           <div className="flex flex-col items-start sm:items-end gap-2.5 flex-shrink-0">
             <div className="bg-[#102a26] text-[#2ee59d] border border-[#2ee59d]/25 px-5 py-2 rounded-full text-xs sm:text-sm font-medium flex items-center gap-2.5 shadow-sm">
               <span className="w-2 h-2 rounded-full bg-[#2ee59d] shadow-[0_0_8px_#2ee59d] animate-pulse"></span>
-              <span>Todo en orden a bordo</span>
+              <span>All systems nominal on board</span>
             </div>
             {!resultadoBackend && (
               <span className="text-sm sm:text-base text-[#a8c4d5] font-medium pr-1">
-                Pregunta {pasoActual + 1} de {totalPreguntas}
+                Question {pasoActual + 1} of {totalPreguntas}
               </span>
             )}
           </div>
@@ -347,10 +347,10 @@ export default function TestSueno({
               {pasoActual === 0 && (
                 <div>
                   <span className="text-xs font-mono uppercase tracking-wider text-[#57d9ed] block mb-1.5">
-                    Conciliación del descanso
+                    Sleep Onset / Latency
                   </span>
                   <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mb-8">
-                    1. ¿Cuánto tiempo tardaste en quedarte dormido/a?
+                    1. How long did it take you to fall asleep?
                   </h2>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
@@ -382,10 +382,10 @@ export default function TestSueno({
               {pasoActual === 1 && (
                 <div>
                   <span className="text-xs font-mono uppercase tracking-wider text-[#57d9ed] block mb-1.5">
-                    Continuidad nocturna
+                    Nighttime Continuity
                   </span>
                   <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mb-8">
-                    2. ¿Cuántas veces te despertaste durante la noche?
+                    2. How many times did you wake up during the night?
                   </h2>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
@@ -408,7 +408,7 @@ export default function TestSueno({
                     })}
                   </div>
 
-                  {/* Si elige "Tres o más veces", especificar número exacto (3 a 30) */}
+                  {/* Si elige "Three or more times", especificar número exacto (3 a 30) */}
                   {modoDespertares === '3+' && (
                     <div className="mt-6 p-5 rounded-2xl bg-[#0d1c2b] border border-[#57d9ed]/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 animate-fadeIn">
                       <div>
@@ -416,10 +416,10 @@ export default function TestSueno({
                           htmlFor="input-despertares"
                           className="text-sm sm:text-base font-semibold text-white block"
                         >
-                          Especificá el número exacto de despertares:
+                          Specify the exact number of awakenings:
                         </label>
                         <span className="text-xs text-[#a8c4d5]">
-                          Ingresá un valor entero entre 3 y 30.
+                          Enter an integer value between 3 and 30.
                         </span>
                       </div>
 
@@ -465,10 +465,10 @@ export default function TestSueno({
               {pasoActual === 2 && (
                 <div>
                   <span className="text-xs font-mono uppercase tracking-wider text-[#57d9ed] block mb-1.5">
-                    Vigilia nocturna
+                    Nighttime Wakefulness
                   </span>
                   <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mb-8">
-                    3. ¿Estuviste despierto/a durante más de 30 minutos seguidos?
+                    3. Were you awake for more than 30 consecutive minutes?
                   </h2>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl">
@@ -500,10 +500,10 @@ export default function TestSueno({
               {pasoActual === 3 && (
                 <div>
                   <span className="text-xs font-mono uppercase tracking-wider text-[#57d9ed] block mb-1.5">
-                    Recuperación matutina
+                    Morning Recovery
                   </span>
                   <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mb-8">
-                    4. ¿Cómo te sentiste al despertar?
+                    4. How did you feel upon waking?
                   </h2>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -535,13 +535,13 @@ export default function TestSueno({
               {pasoActual === 4 && (
                 <div>
                   <span className="text-xs font-mono uppercase tracking-wider text-[#57d9ed] block mb-1.5">
-                    Factores ambientales y personales · Selección múltiple
+                    Environmental & Personal Factors · Multiple Selection
                   </span>
                   <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mb-2">
-                    5. ¿Qué factores interrumpieron tu descanso?
+                    5. What factors interrupted your rest?
                   </h2>
                   <p className="text-xs sm:text-sm text-[#a8c4d5] mb-6">
-                    Podés seleccionar una o varias opciones, o indicar que no hubo interrupciones.
+                    You can select one or multiple options, or indicate that there were no interruptions.
                   </p>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
@@ -584,7 +584,7 @@ export default function TestSueno({
                           : 'bg-[#0d1c2b] text-[#a8c4d5] hover:text-white border-slate-700'
                       }`}
                     >
-                      ✓ Ningún factor interrumpió mi descanso
+                      ✓ No factors interrupted my rest
                     </button>
                   </div>
                 </div>
@@ -594,13 +594,13 @@ export default function TestSueno({
               {pasoActual === 5 && (
                 <div>
                   <span className="text-xs font-mono uppercase tracking-wider text-[#57d9ed] block mb-1.5">
-                    Autopercepción pre-actividad
+                    Pre-Activity Self-Perception
                   </span>
                   <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mb-2">
-                    6. ¿Cómo percibís tu capacidad para realizar las actividades del rover hoy?
+                    6. How do you perceive your ability to perform rover activities today?
                   </h2>
                   <p className="text-xs sm:text-sm text-[#a8c4d5] mb-6">
-                    Esta respuesta es una percepción personal del astronauta y no constituye una autorización médica u operativa.
+                    This response is a personal perception of the astronaut and does not constitute an operational or medical clearance.
                   </p>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -645,7 +645,7 @@ export default function TestSueno({
                 onClick={handleAnterior}
                 className="w-full py-3.5 px-6 rounded-full border border-[#4b6a88]/70 bg-transparent hover:bg-slate-800/50 text-[#a8c4d5] hover:text-white font-medium text-base transition-all cursor-pointer disabled:opacity-50"
               >
-                Anterior
+                Previous
               </button>
 
               <button
@@ -655,12 +655,12 @@ export default function TestSueno({
                 className="w-full py-3.5 px-6 rounded-full bg-[#2ee59d] hover:bg-[#3df2aa] active:scale-[0.99] text-[#062018] font-bold text-base flex items-center justify-center gap-2 shadow-[0_0_22px_rgba(46,229,157,0.25)] transition-all cursor-pointer disabled:opacity-60"
               >
                 {enviando ? (
-                  <span>Procesando registro...</span>
+                  <span>Processing log...</span>
                 ) : esUltimaPregunta ? (
-                  <span>Finalizar registro</span>
+                  <span>Finish log</span>
                 ) : (
                   <>
-                    <span>Siguiente</span>
+                    <span>Next</span>
                     <svg
                       className="w-4 h-4"
                       fill="none"
@@ -684,15 +684,15 @@ export default function TestSueno({
                   ✓ {mensajeBackend}
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-bold text-white mt-1">
-                  Resumen de Descanso Pre-Rover
+                  Pre-Rover Rest Summary
                 </h2>
                 <p className="text-sm text-[#a8c4d5] mt-1">
-                  El registro fue validado y procesado por el servidor BioAstro.
+                  The log was validated and processed by the BioAstro server.
                 </p>
               </div>
 
               <span className="px-4 py-1.5 rounded-full bg-[#102a26] border border-[#2ee59d]/30 text-xs font-mono text-[#2ee59d]">
-                Registro completado
+                Log completed
               </span>
             </div>
 
@@ -701,7 +701,7 @@ export default function TestSueno({
               {/* 1. Latencia de sueño */}
               <div className="bg-[#0d1c2b] border border-slate-800 rounded-2xl p-5">
                 <span className="text-xs font-mono uppercase tracking-wider text-[#57d9ed] block">
-                  Tiempo en dormirse
+                  Time to fall asleep
                 </span>
                 <div className="text-lg font-bold text-white mt-2">
                   {ETIQUETAS_LATENCIA[resultadoBackend.latenciaSueno] ||
@@ -712,19 +712,19 @@ export default function TestSueno({
               {/* 2. Cantidad de despertares */}
               <div className="bg-[#0d1c2b] border border-slate-800 rounded-2xl p-5">
                 <span className="text-xs font-mono uppercase tracking-wider text-[#57d9ed] block">
-                  Cantidad de despertares
+                  Number of awakenings
                 </span>
                 <div className="text-lg font-bold text-white mt-2">
                   {resultadoBackend.cantidadDespertares === 0
-                    ? 'Ninguna vez (0)'
+                    ? 'None (0)'
                     : resultadoBackend.cantidadDespertares === 1
-                    ? '1 vez'
-                    : `${resultadoBackend.cantidadDespertares} veces`}
+                    ? '1 time'
+                    : `${resultadoBackend.cantidadDespertares} times`}
                 </div>
                 <span className="text-xs text-[#a8c4d5] mt-1 block">
-                  Despierto/a +30 min seguidos:{' '}
+                  Awake +30 min continuously:{' '}
                   <strong className="text-white">
-                    {resultadoBackend.despiertoMas30Min ? 'Sí' : 'No'}
+                    {resultadoBackend.despiertoMas30Min ? 'Yes' : 'No'}
                   </strong>
                 </span>
               </div>
@@ -732,7 +732,7 @@ export default function TestSueno({
               {/* 3. Calidad del despertar */}
               <div className="bg-[#0d1c2b] border border-slate-800 rounded-2xl p-5">
                 <span className="text-xs font-mono uppercase tracking-wider text-[#57d9ed] block">
-                  Calidad del despertar
+                  Wake-up quality
                 </span>
                 <div className="text-lg font-bold text-white mt-2">
                   {ETIQUETAS_CALIDAD[resultadoBackend.calidadDespertar] ||
@@ -743,7 +743,7 @@ export default function TestSueno({
               {/* 4. Interrupciones seleccionadas */}
               <div className="bg-[#0d1c2b] border border-slate-800 rounded-2xl p-5 sm:col-span-2 lg:col-span-1">
                 <span className="text-xs font-mono uppercase tracking-wider text-[#57d9ed] block">
-                  Interrupciones reportadas
+                  Reported interruptions
                 </span>
                 {Array.isArray(resultadoBackend.interrupciones) &&
                 resultadoBackend.interrupciones.length > 0 ? (
@@ -759,7 +759,7 @@ export default function TestSueno({
                   </div>
                 ) : (
                   <div className="text-base font-semibold text-[#2ee59d] mt-2">
-                    Sin interrupciones reportadas
+                    No interruptions reported
                   </div>
                 )}
               </div>
@@ -767,14 +767,14 @@ export default function TestSueno({
               {/* 5. Preparación autopercibida para el rover */}
               <div className="bg-[#0d1c2b] border border-[#2ee59d]/30 rounded-2xl p-5 sm:col-span-2">
                 <span className="text-xs font-mono uppercase tracking-wider text-[#2ee59d] block">
-                  Preparación autopercibida — Actividad Rover
+                  Self-perceived Readiness — Rover Activity
                 </span>
                 <div className="text-lg font-bold text-white mt-2">
                   {ETIQUETAS_CAPACIDAD[resultadoBackend.capacidadRover] ||
                     resultadoBackend.capacidadRover}
                 </div>
                 <p className="text-xs text-[#a8c4d5] mt-1.5">
-                  Percepción subjetiva registrada por el tripulante previo a la operación lunar (no representa un dictamen médico automático).
+                  Subjective perception logged by the crewmember prior to lunar operation (does not represent an automated medical ruling).
                 </p>
               </div>
             </div>
@@ -786,7 +786,7 @@ export default function TestSueno({
                 onClick={reiniciarFormulario}
                 className="w-full py-3.5 px-5 rounded-full border border-[#4b6a88]/70 text-[#a8c4d5] hover:text-white hover:bg-slate-800/50 font-medium text-sm sm:text-base transition-all cursor-pointer"
               >
-                Registrar nuevamente
+                Log again
               </button>
 
               {onVolverTests && (
@@ -795,7 +795,7 @@ export default function TestSueno({
                   onClick={onVolverTests}
                   className="w-full py-3.5 px-5 rounded-full border border-[#2ee59d]/50 bg-[#112e2b] hover:bg-[#163d39] text-[#2ee59d] font-semibold text-sm sm:text-base transition-all cursor-pointer"
                 >
-                  Volver a Evaluaciones
+                  Back to Evaluations
                 </button>
               )}
 
@@ -804,7 +804,7 @@ export default function TestSueno({
                 onClick={() => (onVolver ? onVolver() : onVolverTests && onVolverTests())}
                 className="w-full py-3.5 px-5 rounded-full bg-[#2ee59d] hover:bg-[#3df2aa] text-[#062018] font-bold text-sm sm:text-base shadow-[0_0_20px_rgba(46,229,157,0.25)] transition-all cursor-pointer"
               >
-                Volver al inicio
+                Back to Home
               </button>
             </div>
           </div>
@@ -815,10 +815,10 @@ export default function TestSueno({
       <footer className="w-full px-6 sm:px-10 py-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm">
         <div className="flex items-center gap-2 text-[#4d8ec4]">
           <span className="w-2 h-2 rounded-full bg-[#3b9eff]"></span>
-          <span>Datos encriptados y listos para envío</span>
+          <span>Data encrypted and ready for transmission</span>
         </div>
         <div className="text-[#8ba3b8]">
-          Tu bienestar también es parte de la misión.
+          Your wellness is also part of the mission.
         </div>
       </footer>
     </div>

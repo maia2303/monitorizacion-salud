@@ -5,6 +5,9 @@ import ActividadDiaria from './components/ActividadDiaria';
 import ControlOrina from './components/Analisis/ControlOrina';
 import TestPVC from './components/Analisis/TestPVC';
 import TestQUS from './components/Analisis/TestQUS';
+import Tests from './components/Analisis/Tests';
+import TestPANAS from './components/Analisis/TestPANAS';
+import TestSueno from './components/Analisis/TestSueno';
 
 function App() {
   // 1. Estado de autenticación: null indica que no se ha iniciado sesión todavía
@@ -32,12 +35,12 @@ function App() {
   return (
     <div className="min-h-screen w-full bg-[#0b1220] text-slate-100 flex flex-col justify-between selection:bg-cyan-500 selection:text-slate-900 relative">
       
-      {/* Botón flotante para cerrar sesión y volver a Perfil */}
-      <div className="absolute top-4 right-4 sm:right-6 z-50">
+      {/* Botón flotante unificado para cerrar sesión y volver a Perfil */}
+      <div className="absolute top-5 right-4 sm:right-6 z-50">
         <button
           type="button"
           onClick={() => setAstronautaAutenticado(null)}
-          className="bg-slate-900/90 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/80 px-3.5 py-1.5 rounded-xl text-xs font-medium flex items-center gap-1.5 shadow-md cursor-pointer transition-all"
+          className="bg-slate-900/90 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/80 px-3.5 py-2 rounded-xl text-xs font-medium flex items-center gap-1.5 shadow-md cursor-pointer transition-all"
           title="Cerrar sesión del astronauta"
         >
           <span>👤 {datosAstronauta.nombre.split(' ')[1]}</span>
@@ -55,6 +58,32 @@ function App() {
           />
         )}
 
+        {pestanaActiva === 'tests' && (
+          <Tests
+            astronauta={datosAstronauta}
+            onCambiarPestana={setPestanaActiva}
+            onVolver={() => setPestanaActiva('inicio')}
+          />
+        )}
+
+        {pestanaActiva === 'test_panas' && (
+          <TestPANAS
+            astronauta={datosAstronauta}
+            onCambiarPestana={setPestanaActiva}
+            onVolver={() => setPestanaActiva('inicio')}
+            onVolverTests={() => setPestanaActiva('tests')}
+          />
+        )}
+
+        {pestanaActiva === 'test_sueno' && (
+          <TestSueno
+            astronauta={datosAstronauta}
+            onCambiarPestana={setPestanaActiva}
+            onVolver={() => setPestanaActiva('inicio')}
+            onVolverTests={() => setPestanaActiva('tests')}
+          />
+        )}
+
         {pestanaActiva === 'test_orina' && (
           <ControlOrina
             onVolver={() => setPestanaActiva('inicio')}
@@ -66,6 +95,7 @@ function App() {
           <TestPVC
             perfilActivo={astronautaAutenticado}
             onVolver={() => setPestanaActiva('inicio')}
+            onCambiarPestana={setPestanaActiva}
           />
         )}
 
@@ -73,6 +103,7 @@ function App() {
           <TestQUS
             perfilActivo={astronautaAutenticado}
             onVolver={() => setPestanaActiva('inicio')}
+            onCambiarPestana={setPestanaActiva}
           />
         )}
       </div>

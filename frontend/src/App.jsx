@@ -1,92 +1,82 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './App.css';
-import { ESCENARIOS } from './data/escenarios';
-import Navbar from './components/Navbar';
-import ProgressRings from './components/ProgressRings';
-import LunarViewport from './components/LunarViewport';
-import QuickActions from './components/QuickActions';
-import PreventiveBanner from './components/PreventiveBanner';
-import SecondaryView from './components/SecondaryView';
+import Perfil from './components/Perfil';
+import ActividadDiaria from './components/ActividadDiaria';
+import ControlOrina from './components/Analisis/ControlOrina';
+import TestPVC from './components/Analisis/TestPVC';
+import TestQUS from './components/Analisis/TestQUS';
 
 function App() {
+  // 1. Estado de autenticación: null indica que no se ha iniciado sesión todavía
+  const [astronautaAutenticado, setAstronautaAutenticado] = useState(null);
   const [pestanaActiva, setPestanaActiva] = useState('inicio');
 
-  // Estado persistente en localStorage para la demo autoguiada del jurado
-  const [estadoSalud, setEstadoSalud] = useState(() => {
-    const guardado = localStorage.getItem('bioastro_estado');
-    return guardado ? JSON.parse(guardado) : ESCENARIOS.optimo;
-  });
+  // Si no ha iniciado sesión, lo primero que ven los astronautas es Perfil (sin navbar)
+  if (!astronautaAutenticado) {
+    return (
+      <Perfil
+        onIniciarSesion={(tripulanteId) => {
+          setAstronautaAutenticado(tripulanteId);
+          setPestanaActiva('inicio');
+        }}
+      />
+    );
+  }
 
-  useEffect(() => {
-    localStorage.setItem('bioastro_estado', JSON.stringify(estadoSalud));
-  }, [estadoSalud]);
-
-  const cambiarEscenario = (clave) => {
-    setEstadoSalud(ESCENARIOS[clave]);
-  };
-
-  const sumarAgua = () => {
-    setEstadoSalud((prev) => {
-      const nuevaHidratacion = Math.min(100, prev.hidratacion + 12);
-      return {
-        ...prev,
-        hidratacion: nuevaHidratacion,
-        mensaje:
-          nuevaHidratacion >= 80
-            ? '¡Hidratación en nivel ideal! Tus riñones y tu concentración están protegidos para el resto de la jornada lunar.'
-            : prev.mensaje,
-      };
-    });
-  };
-
-  const sumarActividad = () => {
-    setEstadoSalud((prev) => {
-      const nuevaActividad = Math.min(100, prev.actividad + 10);
-      return {
-        ...prev,
-        actividad: nuevaActividad,
-        mensaje:
-          nuevaActividad >= 90
-            ? '¡Escudo óseo del día alcanzado! El impacto mecánico de hoy protege tu densidad ósea en la Luna. Recuerda acompañar con agua.'
-            : prev.mensaje,
-      };
-    });
-  };
+  // Una vez iniciada la sesión, se accede a los datos y a las vistas con navegación
+  const datosAstronauta =
+    astronautaAutenticado === 'grace'
+      ? { nombre: 'Cmdte. Grace K. Wilson', tripulacion: 'Tripulación A' }
+      : { nombre: 'Piloto Rocky C. Mendoza', tripulacion: 'Tripulación A' };
 
   return (
-    <div className="app-container">
-      <Navbar
-        pestanaActiva={pestanaActiva}
-        setPestanaActiva={setPestanaActiva}
-        estadoSalud={estadoSalud}
-        cambiarEscenario={cambiarEscenario}
-        escenarios={ESCENARIOS}
-      />
+    <div className="min-h-screen w-full bg-[#0b1220] text-slate-100 flex flex-col justify-between selection:bg-cyan-500 selection:text-slate-900 relative">
+      
+      {/* Botón flotante para cerrar sesión y volver a Perfil */}
+      <div className="absolute top-4 right-4 sm:right-6 z-50">
+        <button
+          type="button"
+          onClick={() => setAstronautaAutenticado(null)}
+          className="bg-slate-900/90 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/80 px-3.5 py-1.5 rounded-xl text-xs font-medium flex items-center gap-1.5 shadow-md cursor-pointer transition-all"
+          title="Cerrar sesión del astronauta"
+        >
+          <span>👤 {datosAstronauta.nombre.split(' ')[1]}</span>
+          <span className="text-slate-500">|</span>
+          <span className="text-cyan-400 hover:underline">Cambiar Perfil</span>
+        </button>
+      </div>
 
-      {pestanaActiva === 'inicio' ? (
-        <main className="main-stage">
-          <div className="center-hub">
-            <ProgressRings
-              actividad={estadoSalud.actividad}
-              hidratacion={estadoSalud.hidratacion}
-            />
+      {/* VISTAS PRINCIPALES AUTENTICADAS */}
+      <div className="flex-1 flex flex-col">
+        {pestanaActiva === 'inicio' && (
+          <ActividadDiaria
+            astronauta={datosAstronauta}
+            onCambiarPestana={setPestanaActiva}
+          />
+        )}
 
-            <LunarViewport velocidadCaminata={estadoSalud.velocidadCaminata} />
+        {pestanaActiva === 'test_orina' && (
+          <ControlOrina
+            onVolver={() => setPestanaActiva('inicio')}
+            onCambiarPestana={setPestanaActiva}
+          />
+        )}
 
-            <QuickActions
-              sumarActividad={sumarActividad}
-              sumarAgua={sumarAgua}
-            />
-          </div>
+        {pestanaActiva === 'test_pvc' && (
+          <TestPVC
+            perfilActivo={astronautaAutenticado}
+            onVolver={() => setPestanaActiva('inicio')}
+          />
+        )}
 
-          <PreventiveBanner mensaje={estadoSalud.mensaje} />
-        </main>
-      ) : (
-        <SecondaryView
-          pestanaActiva={pestanaActiva}
-          onVolver={() => setPestanaActiva('inicio')}
-        />
-      )}
+        {pestanaActiva === 'test_qus' && (
+          <TestQUS
+            perfilActivo={astronautaAutenticado}
+            onVolver={() => setPestanaActiva('inicio')}
+          />
+        )}
+      </div>
+
     </div>
   );
 }

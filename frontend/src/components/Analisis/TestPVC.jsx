@@ -1,0 +1,189 @@
+import React, { useState } from 'react';
+import { GraceAvatar, RockyAvatar } from '../AstronautAvatars';
+
+export default function TestPVC({ perfilActivo = 'grace', onVolver }) {
+  const [presionPVC, setPresionPVC] = useState(perfilActivo === 'grace' ? 4.8 : 6.2); // mmHg
+  const frecuenciaCardiaca = perfilActivo === 'grace' ? 64 : 72; // bpm
+  const [calibrado, setCalibrado] = useState(true);
+
+  // Checkboxes interactivos
+  const [compensacionGravedad, setCompensacionGravedad] = useState(true);
+  const [filtroOndaVenosa, setFiltroOndaVenosa] = useState(true);
+  const [sensorTranscutaneo, setSensorTranscutaneo] = useState(true);
+  const [alertaSobrecarga, setAlertaSobrecarga] = useState(false);
+
+  const astronauta = perfilActivo === 'grace'
+    ? { nombre: 'Grace K. Wilson', rango: 'Comandante', avatar: <GraceAvatar className="w-12 h-12" /> }
+    : { nombre: 'Rocky C. Mendoza', rango: 'Piloto', avatar: <RockyAvatar className="w-12 h-12" /> };
+
+  const recalibrar = () => {
+    setCalibrado(false);
+    setTimeout(() => {
+      setCalibrado(true);
+      setPresionPVC(perfilActivo === 'grace' ? 4.5 : 5.8);
+    }, 1000);
+  };
+
+  return (
+    <div className="min-h-full bg-[#0b1220] text-slate-100 p-4 sm:p-8 max-w-6xl mx-auto">
+      {/* Cabecera */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-slate-800">
+        <div>
+          <div className="flex items-center gap-2 text-xs font-mono text-sky-400 uppercase tracking-widest">
+            <span>BioAstro Cardiovascular</span>
+            <span>//</span>
+            <span>Telemetría Hemodinámica</span>
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-white mt-1">
+            Test PVC (Presión Venosa Central)
+          </h1>
+          <p className="text-sm text-slate-400 mt-1">
+            Monitoreo continuo de precarga cardíaca y redistribución de fluidos en 1/6 G
+          </p>
+        </div>
+
+        <div className="flex items-center gap-3 bg-[#131d2e] border border-slate-700/80 rounded-2xl p-2.5 px-4 shadow-lg">
+          <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 bg-slate-800">
+            {astronauta.avatar}
+          </div>
+          <div>
+            <div className="text-sm font-bold text-white">{astronauta.nombre}</div>
+            <div className="text-xs text-sky-400 font-medium">{astronauta.rango}</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Grid de contenido */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+        
+        {/* Onda Venosa y Monitor */}
+        <div className="lg:col-span-2 bg-[#131d2e] border border-slate-700/80 rounded-3xl p-6 sm:p-8 shadow-xl flex flex-col justify-between">
+          <div>
+            <div className="flex items-center justify-between">
+              <h2 className="text-base font-bold text-white flex items-center gap-2">
+                <span>🫀</span> Monitor de Onda Venosa Yugular / Aurícula Derecha
+              </h2>
+              <span className="text-xs font-mono px-3 py-1 rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-500/30">
+                ● En vivo (1/6 G)
+              </span>
+            </div>
+
+            {/* Simulación visual de onda cardíaca PVC */}
+            <div className="mt-6 p-4 rounded-2xl bg-slate-950 border border-slate-800 h-44 flex items-center justify-center relative overflow-hidden">
+              <svg className="w-full h-full text-cyan-400 opacity-90" viewBox="0 0 500 120" preserveAspectRatio="none">
+                <path
+                  d="M0,60 Q25,30 50,60 T100,60 T150,20 T200,90 T250,55 T300,60 T350,30 T400,60 T450,20 T500,60"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                />
+              </svg>
+              <div className="absolute top-3 left-4 text-xs font-mono text-slate-400">
+                Ondas a, c, v • Desplazamiento cefálico fisiológico
+              </div>
+            </div>
+
+            {/* Métricas clave */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-6">
+              <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+                <span className="text-xs text-slate-400">Presión PVC</span>
+                <div className="text-2xl font-black text-white mt-1">{presionPVC.toFixed(1)} mmHg</div>
+                <span className="text-[11px] text-emerald-400 font-medium">Normal adaptado</span>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+                <span className="text-xs text-slate-400">Frecuencia Cardíaca</span>
+                <div className="text-2xl font-black text-white mt-1">{frecuenciaCardiaca} lpm</div>
+                <span className="text-[11px] text-sky-400 font-medium">Ritmo sinusal regular</span>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 col-span-2 sm:col-span-1">
+                <span className="text-xs text-slate-400">Volumen Sistólico</span>
+                <div className="text-2xl font-black text-white mt-1">74 ml</div>
+                <span className="text-[11px] text-cyan-400 font-medium">Gasto óptimo</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-6 flex flex-wrap gap-3">
+            <button
+              type="button"
+              onClick={recalibrar}
+              className="bg-slate-800 hover:bg-slate-700 text-sky-300 border border-sky-500/30 px-4 py-2 rounded-xl text-xs font-semibold cursor-pointer"
+            >
+              {calibrado ? '⚡ Recalibrar Transductor de Presión' : 'Calibrando...'}
+            </button>
+            {onVolver && (
+              <button
+                type="button"
+                onClick={onVolver}
+                className="text-xs text-slate-400 hover:text-white underline cursor-pointer ml-auto"
+              >
+                ← Volver a Inicio
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Checkboxes de Configuración y Diagnóstico */}
+        <div className="bg-[#131d2e] border border-slate-700/80 rounded-3xl p-6 shadow-xl flex flex-col justify-between">
+          <div>
+            <h3 className="text-base font-bold text-white mb-2">Parámetros del Sensor</h3>
+            <p className="text-xs text-slate-400 mb-6">
+              Filtro digital contra vibración del motor del rover lunar
+            </p>
+
+            <div className="space-y-4">
+              <label className="flex items-center gap-2.5 text-xs text-slate-300 hover:text-white cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  checked={compensacionGravedad}
+                  onChange={(e) => setCompensacionGravedad(e.target.checked)}
+                  className="w-4 h-4 rounded border-slate-700 bg-slate-800 text-sky-500 accent-sky-500 cursor-pointer"
+                />
+                <span>Compensación barométrica 1/6 G</span>
+              </label>
+
+              <label className="flex items-center gap-2.5 text-xs text-slate-300 hover:text-white cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  checked={filtroOndaVenosa}
+                  onChange={(e) => setFiltroOndaVenosa(e.target.checked)}
+                  className="w-4 h-4 rounded border-slate-700 bg-slate-800 text-sky-500 accent-sky-500 cursor-pointer"
+                />
+                <span>Filtro de artefacto de movimiento</span>
+              </label>
+
+              <label className="flex items-center gap-2.5 text-xs text-slate-300 hover:text-white cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  checked={sensorTranscutaneo}
+                  onChange={(e) => setSensorTranscutaneo(e.target.checked)}
+                  className="w-4 h-4 rounded border-slate-700 bg-slate-800 text-sky-500 accent-sky-500 cursor-pointer"
+                />
+                <span>Sensor transcutáneo no invasivo</span>
+              </label>
+
+              <label className="flex items-center gap-2.5 text-xs text-slate-300 hover:text-white cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  checked={alertaSobrecarga}
+                  onChange={(e) => setAlertaSobrecarga(e.target.checked)}
+                  className="w-4 h-4 rounded border-slate-700 bg-slate-800 text-amber-500 accent-amber-500 cursor-pointer"
+                />
+                <span>Alerta por congestión venosa cefálica</span>
+              </label>
+            </div>
+
+            <div className="mt-8 p-4 rounded-2xl bg-[#091b2e] border border-sky-500/30 text-xs text-slate-300">
+              <span className="font-bold text-sky-400 block mb-1">Nota Médica Artemis:</span>
+              La microgravedad produce una traslocación de sangre hacia la cabeza y tórax. Mantener la PVC en rango menor a 8 mmHg previene cefaleas y edema facial.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+}

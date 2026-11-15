@@ -32,28 +32,22 @@ function App() {
       ? { nombre: 'Cmdte. Grace K. Wilson', tripulacion: 'Tripulación A' }
       : { nombre: 'Piloto Rocky C. Mendoza', tripulacion: 'Tripulación A' };
 
-  const esVistaBienestar = ['tests', 'test_panas', 'test_sueno'].includes(
-    pestanaActiva
-  );
-
   return (
     <div className="min-h-screen w-full bg-[#0b1220] text-slate-100 flex flex-col justify-between selection:bg-cyan-500 selection:text-slate-900 relative">
       
-      {/* Botón flotante para cerrar sesión y volver a Perfil (en vistas que no integran el botón en su propio header) */}
-      {!esVistaBienestar && (
-        <div className="absolute top-4 right-4 sm:right-6 z-50">
-          <button
-            type="button"
-            onClick={() => setAstronautaAutenticado(null)}
-            className="bg-slate-900/90 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/80 px-3.5 py-1.5 rounded-xl text-xs font-medium flex items-center gap-1.5 shadow-md cursor-pointer transition-all"
-            title="Cerrar sesión del astronauta"
-          >
-            <span>👤 {datosAstronauta.nombre.split(' ')[1]}</span>
-            <span className="text-slate-500">|</span>
-            <span className="text-cyan-400 hover:underline">Cambiar Perfil</span>
-          </button>
-        </div>
-      )}
+      {/* Botón flotante unificado para cerrar sesión y volver a Perfil */}
+      <div className="absolute top-5 right-4 sm:right-6 z-50">
+        <button
+          type="button"
+          onClick={() => setAstronautaAutenticado(null)}
+          className="bg-slate-900/90 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/80 px-3.5 py-2 rounded-xl text-xs font-medium flex items-center gap-1.5 shadow-md cursor-pointer transition-all"
+          title="Cerrar sesión del astronauta"
+        >
+          <span>👤 {datosAstronauta.nombre.split(' ')[1]}</span>
+          <span className="text-slate-500">|</span>
+          <span className="text-cyan-400 hover:underline">Cambiar Perfil</span>
+        </button>
+      </div>
 
       {/* VISTAS PRINCIPALES AUTENTICADAS */}
       <div className="flex-1 flex flex-col">
@@ -68,7 +62,6 @@ function App() {
           <Tests
             astronauta={datosAstronauta}
             onCambiarPestana={setPestanaActiva}
-            onCambiarPerfil={() => setAstronautaAutenticado(null)}
             onVolver={() => setPestanaActiva('inicio')}
           />
         )}
@@ -76,18 +69,18 @@ function App() {
         {pestanaActiva === 'test_panas' && (
           <TestPANAS
             astronauta={datosAstronauta}
+            onCambiarPestana={setPestanaActiva}
             onVolver={() => setPestanaActiva('inicio')}
             onVolverTests={() => setPestanaActiva('tests')}
-            onCambiarPerfil={() => setAstronautaAutenticado(null)}
           />
         )}
 
         {pestanaActiva === 'test_sueno' && (
           <TestSueno
             astronauta={datosAstronauta}
+            onCambiarPestana={setPestanaActiva}
             onVolver={() => setPestanaActiva('inicio')}
             onVolverTests={() => setPestanaActiva('tests')}
-            onCambiarPerfil={() => setAstronautaAutenticado(null)}
           />
         )}
 
@@ -102,6 +95,7 @@ function App() {
           <TestPVC
             perfilActivo={astronautaAutenticado}
             onVolver={() => setPestanaActiva('inicio')}
+            onCambiarPestana={setPestanaActiva}
           />
         )}
 
@@ -109,6 +103,7 @@ function App() {
           <TestQUS
             perfilActivo={astronautaAutenticado}
             onVolver={() => setPestanaActiva('inicio')}
+            onCambiarPestana={setPestanaActiva}
           />
         )}
       </div>

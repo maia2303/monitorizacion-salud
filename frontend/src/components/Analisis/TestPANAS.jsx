@@ -34,9 +34,9 @@ const OPCIONES_LIKERT = [
 
 export default function TestPANAS({
   astronauta = { nombre: 'Cmdte. Alex Vega', tripulacion: 'Tripulación A' },
+  onCambiarPestana,
   onVolver,
   onVolverTests,
-  onCambiarPerfil,
 }) {
   const [pasoActual, setPasoActual] = useState(0);
   const [respuestas, setRespuestas] = useState(() => Array(20).fill(null));
@@ -129,43 +129,61 @@ export default function TestPANAS({
   };
 
   return (
-    <div className="min-h-screen w-full bg-[#0b1320] text-[#eaf7ff] flex flex-col justify-between font-sans selection:bg-cyan-500 selection:text-slate-900">
-      {/* HEADER SUPERIOR (ESTILO IMAGEN 1) */}
-      <header className="w-full px-6 sm:px-10 py-4 border-b border-slate-800/80 flex flex-wrap items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
+    <div className="min-h-screen w-full bg-[#0b1220] text-[#eaf7ff] flex flex-col justify-between font-sans selection:bg-cyan-500 selection:text-slate-900">
+      {/* HEADER SUPERIOR UNIFICADO */}
+      <header className="px-6 sm:px-10 py-5 border-b border-slate-800/80 flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <div className="flex items-center gap-2 text-xs md:text-sm font-mono tracking-wider">
+            <span className="font-bold text-slate-200">ROVER LUNAR</span>
+            <span className="text-cyan-400 font-bold mx-1">//</span>
+            <span className="text-slate-300 font-normal">DÍA 42</span>
+          </div>
+          <div className="text-xs text-slate-400 mt-1">
+            {astronauta.nombre} · {astronauta.tripulacion}
+          </div>
+        </div>
+
+        <nav className="flex flex-wrap items-center gap-2 sm:mr-48">
           <button
             type="button"
-            onClick={() => (onVolver ? onVolver() : onVolverTests && onVolverTests())}
-            className="px-5 py-2 rounded-xl text-xs sm:text-sm font-medium bg-[#112e2b] hover:bg-[#163d39] text-[#2ee59d] border border-[#2ee59d]/40 transition-all cursor-pointer"
+            onClick={() => (onCambiarPestana ? onCambiarPestana('inicio') : onVolver && onVolver())}
+            className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
             Inicio
           </button>
 
-          {onVolverTests && (
-            <button
-              type="button"
-              onClick={onVolverTests}
-              className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium text-[#a8c4d5] hover:text-white hover:bg-slate-800/50 transition-all cursor-pointer"
-            >
-              ← Evaluaciones
-            </button>
-          )}
-        </div>
+          <button
+            type="button"
+            onClick={() => (onVolverTests ? onVolverTests() : onCambiarPestana && onCambiarPestana('tests'))}
+            className="px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold tracking-wide bg-[#0d342f] text-[#34d399] border border-emerald-500/30 shadow-[0_0_15px_rgba(52,211,153,0.15)] cursor-pointer select-none"
+          >
+            Bienestar y Tests
+          </button>
 
-        <div className="flex items-center gap-4">
-          <span className="text-xs sm:text-sm text-[#a8c4d5] font-medium">
-            {astronauta?.nombre || 'Cmdte. Alex Vega'}
-          </span>
-          {onCambiarPerfil && (
-            <button
-              type="button"
-              onClick={onCambiarPerfil}
-              className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-[#112e2b] hover:bg-[#163d39] text-[#2ee59d] border border-[#2ee59d]/40 transition-all cursor-pointer"
-            >
-              Cambiar perfil
-            </button>
-          )}
-        </div>
+          <button
+            type="button"
+            onClick={() => onCambiarPestana && onCambiarPestana('test_orina')}
+            className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
+          >
+            Test Orina
+          </button>
+
+          <button
+            type="button"
+            onClick={() => onCambiarPestana && onCambiarPestana('test_pvc')}
+            className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
+          >
+            Test PVC
+          </button>
+
+          <button
+            type="button"
+            onClick={() => onCambiarPestana && onCambiarPestana('test_qus')}
+            className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
+          >
+            Test QUS
+          </button>
+        </nav>
       </header>
 
       {/* CONTENIDO PRINCIPAL */}

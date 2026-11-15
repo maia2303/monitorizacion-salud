@@ -66,7 +66,7 @@ export default function ActividadDiaria({
         </div>
 
         {/* Pestañas de navegación superiores */}
-        <nav className="flex flex-wrap items-center gap-2">
+        <nav className="flex flex-wrap items-center gap-2 sm:mr-48">
           <button
             type="button"
             className="px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold tracking-wide bg-[#0d342f] text-[#34d399] border border-emerald-500/30 shadow-[0_0_15px_rgba(52,211,153,0.15)] cursor-pointer select-none"
@@ -77,7 +77,7 @@ export default function ActividadDiaria({
           <button
             type="button"
             onClick={() => onCambiarPestana && onCambiarPestana('tests')}
-            className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-cyan-300 bg-cyan-950/40 border border-cyan-500/30 hover:bg-cyan-900/50 transition-colors cursor-pointer select-none"
+            className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
             Bienestar y Tests
           </button>

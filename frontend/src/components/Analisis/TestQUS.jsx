@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { GraceAvatar, RockyAvatar } from '../AstronautAvatars';
 
-export default function TestQUS({ perfilActivo = 'grace', onVolver }) {
+export default function TestQUS({ perfilActivo = 'grace', onVolver, onCambiarPestana }) {
   const [bua, setBua] = useState(perfilActivo === 'grace' ? 116 : 98); // dB/MHz
   const [sos, setSos] = useState(perfilActivo === 'grace' ? 1552 : 1515); // m/s
   const [tScore, setTScore] = useState(perfilActivo === 'grace' ? -0.2 : -0.8);
@@ -28,9 +28,65 @@ export default function TestQUS({ perfilActivo = 'grace', onVolver }) {
   };
 
   return (
-    <div className="min-h-full bg-[#0b1220] text-slate-100 p-4 sm:p-8 max-w-6xl mx-auto">
-      {/* Cabecera */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-slate-800">
+    <div className="w-full bg-[#0b1220] text-slate-100 flex flex-col justify-between font-sans selection:bg-cyan-500 selection:text-slate-900 min-h-screen">
+      {/* HEADER SUPERIOR UNIFICADO */}
+      <header className="px-6 sm:px-10 py-5 border-b border-slate-800/80 flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <div className="flex items-center gap-2 text-xs md:text-sm font-mono tracking-wider">
+            <span className="font-bold text-slate-200">ROVER LUNAR</span>
+            <span className="text-cyan-400 font-bold mx-1">//</span>
+            <span className="text-slate-300 font-normal">DÍA 42</span>
+          </div>
+          <div className="text-xs text-slate-400 mt-1">
+            {astronauta.nombre} · Tripulación A
+          </div>
+        </div>
+
+        <nav className="flex flex-wrap items-center gap-2 sm:mr-48">
+          <button
+            type="button"
+            onClick={() => (onCambiarPestana ? onCambiarPestana('inicio') : onVolver && onVolver())}
+            className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
+          >
+            Inicio
+          </button>
+
+          <button
+            type="button"
+            onClick={() => onCambiarPestana && onCambiarPestana('tests')}
+            className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
+          >
+            Bienestar y Tests
+          </button>
+
+          <button
+            type="button"
+            onClick={() => onCambiarPestana && onCambiarPestana('test_orina')}
+            className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
+          >
+            Test Orina
+          </button>
+
+          <button
+            type="button"
+            onClick={() => onCambiarPestana && onCambiarPestana('test_pvc')}
+            className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
+          >
+            Test PVC
+          </button>
+
+          <button
+            type="button"
+            className="px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold tracking-wide bg-[#0d342f] text-[#34d399] border border-emerald-500/30 shadow-[0_0_15px_rgba(52,211,153,0.15)] cursor-pointer select-none"
+          >
+            Test QUS
+          </button>
+        </nav>
+      </header>
+
+      <div className="flex-1 p-4 sm:p-8 max-w-6xl w-full mx-auto">
+        {/* Cabecera */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-slate-800">
         <div>
           <div className="flex items-center gap-2 text-xs font-mono text-emerald-400 uppercase tracking-widest">
             <span>BioAstro Osteología</span>
@@ -204,6 +260,7 @@ export default function TestQUS({ perfilActivo = 'grace', onVolver }) {
           </div>
         </div>
 
+      </div>
       </div>
     </div>
   );

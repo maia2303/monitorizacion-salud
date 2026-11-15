@@ -117,7 +117,7 @@ export default function ControlOrina({ onVolver, onCambiarPestana }) {
         </div>
 
         {/* Pestañas de navegación */}
-        <nav className="flex flex-wrap items-center gap-2">
+        <nav className="flex flex-wrap items-center gap-2 sm:mr-48">
           <button
             type="button"
             onClick={() => onCambiarPestana ? onCambiarPestana('inicio') : onVolver && onVolver()}

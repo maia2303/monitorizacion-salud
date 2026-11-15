@@ -262,7 +262,6 @@ function IlustracionSueno() {
 export default function Tests({
   astronauta = { nombre: 'Cmdte. Alex Vega', tripulacion: 'Tripulación A' },
   onCambiarPestana,
-  onCambiarPerfil,
   onVolver,
 }) {
   const irAPestana = (id) => {
@@ -274,21 +273,32 @@ export default function Tests({
   };
 
   return (
-    <div className="min-h-screen w-full bg-[#0b1320] text-[#eaf7ff] flex flex-col justify-between font-sans selection:bg-cyan-500 selection:text-slate-900">
-      {/* BARRA SUPERIOR (ESTILO DE LA IMAGEN + NAVEGACIÓN INTEGRADA) */}
-      <header className="w-full px-6 sm:px-10 py-4 border-b border-slate-800/80 flex flex-wrap items-center justify-between gap-4">
-        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+    <div className="min-h-screen w-full bg-[#0b1220] text-[#eaf7ff] flex flex-col justify-between font-sans selection:bg-cyan-500 selection:text-slate-900">
+      {/* HEADER SUPERIOR UNIFICADO */}
+      <header className="px-6 sm:px-10 py-5 border-b border-slate-800/80 flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <div className="flex items-center gap-2 text-xs md:text-sm font-mono tracking-wider">
+            <span className="font-bold text-slate-200">ROVER LUNAR</span>
+            <span className="text-cyan-400 font-bold mx-1">//</span>
+            <span className="text-slate-300 font-normal">DÍA 42</span>
+          </div>
+          <div className="text-xs text-slate-400 mt-1">
+            {astronauta.nombre} · {astronauta.tripulacion}
+          </div>
+        </div>
+
+        <nav className="flex flex-wrap items-center gap-2 sm:mr-48">
           <button
             type="button"
             onClick={() => irAPestana('inicio')}
-            className="px-5 py-2 rounded-xl text-xs sm:text-sm font-medium bg-[#112e2b] hover:bg-[#163d39] text-[#2ee59d] border border-[#2ee59d]/40 transition-all cursor-pointer"
+            className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
             Inicio
           </button>
 
           <button
             type="button"
-            className="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-[#162234] text-[#57d9ed] border border-[#57d9ed]/40 cursor-pointer"
+            className="px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold tracking-wide bg-[#0d342f] text-[#34d399] border border-emerald-500/30 shadow-[0_0_15px_rgba(52,211,153,0.15)] cursor-pointer select-none"
           >
             Bienestar y Tests
           </button>
@@ -296,7 +306,7 @@ export default function Tests({
           <button
             type="button"
             onClick={() => irAPestana('test_orina')}
-            className="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer"
+            className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
             Test Orina
           </button>
@@ -304,7 +314,7 @@ export default function Tests({
           <button
             type="button"
             onClick={() => irAPestana('test_pvc')}
-            className="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer"
+            className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
             Test PVC
           </button>
@@ -312,26 +322,11 @@ export default function Tests({
           <button
             type="button"
             onClick={() => irAPestana('test_qus')}
-            className="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer"
+            className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
             Test QUS
           </button>
-        </div>
-
-        <div className="flex items-center gap-4">
-          <span className="text-xs sm:text-sm text-[#a8c4d5] font-medium">
-            {astronauta?.nombre || 'Cmdte. Alex Vega'}
-          </span>
-          {onCambiarPerfil && (
-            <button
-              type="button"
-              onClick={onCambiarPerfil}
-              className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-[#112e2b] hover:bg-[#163d39] text-[#2ee59d] border border-[#2ee59d]/40 transition-all cursor-pointer"
-            >
-              Cambiar perfil
-            </button>
-          )}
-        </div>
+        </nav>
       </header>
 
       {/* CONTENIDO PRINCIPAL */}

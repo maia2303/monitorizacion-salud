@@ -1,211 +1,359 @@
 import React, { useState } from 'react';
-import { GraceAvatar, RockyAvatar } from '../AstronautAvatars';
+import qusApi from '../../services/qusApi';
+import simulacionJSON from '../../data/simulacionQUS.json';
 
-export default function TestQUS({ perfilActivo = 'grace', onVolver }) {
-  const [bua, setBua] = useState(perfilActivo === 'grace' ? 116 : 98); // dB/MHz
-  const [sos, setSos] = useState(perfilActivo === 'grace' ? 1552 : 1515); // m/s
-  const [tScore, setTScore] = useState(perfilActivo === 'grace' ? -0.2 : -0.8);
-  const [escaneando, setEscaneando] = useState(false);
+export default function TestQUS({ onVolver }) {
+  // Estado de sincronización
+  const [sincronizando, setSincronizando] = useState(false);
+  const [resultadoBackend, setResultadoBackend] = useState(null);
+  const [mensajeExito, setMensajeExito] = useState('');
+  const [mostrarJSONCrudo, setMostrarJSONCrudo] = useState(false);
+  const [errorBackend, setErrorBackend] = useState('');
 
-  // Checkboxes interactivos
-  const [calibracionGel, setCalibracionGel] = useState(true);
-  const [analisisCalcaneo, setAnalisisCalcaneo] = useState(true);
-  const [seguimientoHistorico, setSeguimientoHistorico] = useState(true);
-  const [alertaImpacto, setAlertaImpacto] = useState(perfilActivo === 'rocky');
+  // Sincronizar datos del JSON con la API del backend
+  const handleSincronizar = async () => {
+    setSincronizando(true);
+    setErrorBackend('');
+    setMensajeExito('');
 
-  const astronauta = perfilActivo === 'grace'
-    ? { nombre: 'Grace K. Wilson', rango: 'Comandante', avatar: <GraceAvatar className="w-12 h-12" /> }
-    : { nombre: 'Rocky C. Mendoza', rango: 'Piloto', avatar: <RockyAvatar className="w-12 h-12" /> };
+    try {
+      // Lleva el JSON a la API del backend (POST /api/qus/sincronizar)
+      const respuesta = await qusApi.sincronizar(simulacionJSON);
 
-  const ejecutarEscaneo = () => {
-    setEscaneando(true);
-    setTimeout(() => {
-      setEscaneando(false);
-      setBua((prev) => prev + 2);
-      setSos((prev) => prev + 5);
-      setTScore((prev) => Math.min(0.2, Number((prev + 0.1).toFixed(1))));
-    }, 1400);
+      if (respuesta && respuesta.resultado) {
+        setResultadoBackend(respuesta.resultado);
+        setMensajeExito(
+          respuesta.mensaje || 'Telemetría de ultrasonido QUS sincronizada y calculada correctamente'
+        );
+      }
+    } catch (err) {
+      setErrorBackend(err.message || 'Error al conectar con la API del backend');
+    } finally {
+      setSincronizando(false);
+    }
   };
 
   return (
-    <div className="min-h-full bg-[#0b1220] text-slate-100 p-4 sm:p-8 max-w-6xl mx-auto">
-      {/* Cabecera */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-slate-800">
-        <div>
-          <div className="flex items-center gap-2 text-xs font-mono text-emerald-400 uppercase tracking-widest">
-            <span>BioAstro Osteología</span>
-            <span>//</span>
-            <span>Ultrasonometría Cuantitativa</span>
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-white mt-1">
-            Test QUS (Ultrasonido de Calcáneo)
-          </h1>
-          <p className="text-sm text-slate-400 mt-1">
-            Evaluación no invasiva de microarquitectura y densidad mineral ósea lunar
-          </p>
-        </div>
+    <div className="w-full bg-[#0b1220] text-slate-100 flex flex-col justify-between font-sans selection:bg-cyan-500 selection:text-slate-900 min-h-screen">
+      
+      {/* 1. HEADER SUPERIOR */}
+      <header className="px-6 sm:px-10 py-4 border-b border-slate-800/80 flex items-center justify-between gap-4">
+        <button
+          type="button"
+          onClick={onVolver}
+          className="bg-[#103b32] hover:bg-[#14473d] text-[#34d399] font-medium text-sm px-5 py-2 rounded-xl border border-emerald-500/30 transition-all cursor-pointer shadow-sm flex items-center gap-2"
+        >
+          <span>←</span>
+          <span>Volver a Inicio</span>
+        </button>
 
-        <div className="flex items-center gap-3 bg-[#131d2e] border border-slate-700/80 rounded-2xl p-2.5 px-4 shadow-lg">
-          <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 bg-slate-800">
-            {astronauta.avatar}
-          </div>
-          <div>
-            <div className="text-sm font-bold text-white">{astronauta.nombre}</div>
-            <div className="text-xs text-emerald-400 font-medium">{astronauta.rango}</div>
-          </div>
+        <div className="flex items-center gap-3">
+          <span className="text-xs text-slate-400 font-mono">
+            DISPOSITIVO: {simulacionJSON.device_id}
+          </span>
+          <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] animate-pulse"></span>
         </div>
-      </div>
+      </header>
 
-      {/* Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+      {/* 2. CONTENIDO PRINCIPAL */}
+      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-8 py-8 md:py-10">
         
-        {/* Métricas y Visualización Acústica */}
-        <div className="lg:col-span-2 bg-[#131d2e] border border-slate-700/80 rounded-3xl p-6 sm:p-8 shadow-xl flex flex-col justify-between">
+        {/* TÍTULO Y DESCRIPCIÓN */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
           <div>
-            <div className="flex items-center justify-between">
-              <h2 className="text-base font-bold text-white flex items-center gap-2">
-                <span>🦴</span> Transmisión Acústica de Calcáneo Bilateral
-              </h2>
-              <span className="text-xs font-mono px-3 py-1 rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-500/30">
-                Transductor Lunar QUS-2
+            <div className="flex items-center gap-2 text-xs font-mono text-cyan-400 uppercase tracking-widest mb-1">
+              <span>BioAstro Osteología</span>
+              <span>//</span>
+              <span>Módulo de Ultrasonometría Cuantitativa</span>
+            </div>
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+              Test QUS · Ultrasonido Óseo de Calcáneo
+            </h1>
+            <p className="text-slate-400 mt-2 text-sm sm:text-base">
+              Simulacro de ingreso de telemetría acústica y cálculo de densidad trabecular en microgravedad (1/6 G).
+            </p>
+          </div>
+
+          <div className="bg-[#0e2a24] text-emerald-400 border border-emerald-500/20 px-4 py-2 rounded-full text-xs sm:text-sm font-medium flex items-center gap-2">
+            <span>Astronauta:</span>
+            <strong className="text-white">{simulacionJSON.astronaut_name}</strong>
+          </div>
+        </div>
+
+        {/* MENSAJES DE ESTADO */}
+        {mensajeExito && (
+          <div className="mb-6 p-4 rounded-2xl bg-emerald-950/70 border border-emerald-500/40 text-emerald-200 text-xs sm:text-sm flex items-center gap-3 shadow-lg animate-fadeIn">
+            <span className="w-3 h-3 rounded-full bg-emerald-400 flex-shrink-0 animate-ping"></span>
+            <div>
+              <strong className="text-white block font-semibold">{mensajeExito}</strong>
+              <span className="text-slate-300">
+                La API del backend ha procesado las métricas, ejecutado las cuentas clínicas y registrado los datos.
               </span>
             </div>
+          </div>
+        )}
 
-            {/* Gráfico de Ondas Acústicas */}
-            <div className="mt-6 p-4 rounded-2xl bg-slate-950 border border-slate-800 h-44 flex flex-col justify-between relative overflow-hidden">
-              <div className="text-xs font-mono text-slate-400">
-                Atenuación Acústica de Banda Ancha (BUA) vs Velocidad del Sonido (SOS)
-              </div>
+        {errorBackend && (
+          <div className="mb-6 p-4 rounded-2xl bg-red-950/60 border border-red-500/40 text-red-200 text-xs sm:text-sm flex items-center gap-3 shadow-lg">
+            <span>⚠️</span>
+            <span>{errorBackend}</span>
+          </div>
+        )}
 
-              {/* Curvas de ultrasonido */}
-              <svg className="w-full h-28 text-emerald-400" viewBox="0 0 500 100" preserveAspectRatio="none">
-                <path
-                  d="M0,80 Q70,75 140,50 T280,25 T400,60 T500,45"
-                  fill="none"
-                  stroke="#34d399"
-                  strokeWidth="3"
-                />
-                <path
-                  d="M0,90 Q80,85 160,65 T300,40 T420,70 T500,55"
-                  fill="none"
-                  stroke="#38bdf8"
-                  strokeWidth="2"
-                  strokeDasharray="4 4"
-                />
-              </svg>
-
-              <div className="flex justify-between text-[11px] font-mono text-slate-500">
-                <span>0.2 MHz</span>
-                <span>0.5 MHz (Frecuencia Central)</span>
-                <span>0.8 MHz</span>
-              </div>
-            </div>
-
-            {/* Métricas clave */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
-              <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
-                <span className="text-xs text-slate-400">BUA (Atenuación)</span>
-                <div className="text-2xl font-black text-white mt-1">{bua} dB/MHz</div>
-                <span className="text-[11px] text-emerald-400 font-medium">Trabecular denso</span>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
-                <span className="text-xs text-slate-400">SOS (Velocidad)</span>
-                <div className="text-2xl font-black text-white mt-1">{sos} m/s</div>
-                <span className="text-[11px] text-sky-400 font-medium">Elasticidad ósea óptima</span>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
-                <span className="text-xs text-slate-400">T-Score Estimado</span>
-                <div className="text-2xl font-black text-white mt-1">{tScore}</div>
-                <span className={`text-[11px] font-medium ${tScore >= -0.5 ? 'text-emerald-400' : 'text-amber-400'}`}>
-                  {tScore >= -0.5 ? 'Sin osteopenia' : 'Alerta de resorción leve'}
+        {/* GRID DE DOS COLUMNAS */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          {/* COLUMNA IZQUIERDA (5/12): PAQUETE DE DATOS JSON A SINCRONIZAR */}
+          <div className="lg:col-span-5 bg-[#131d2e] border border-slate-800/90 rounded-3xl p-6 sm:p-7 shadow-2xl flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-lg font-bold text-white flex items-center gap-2">
+                  <span>🛰️</span> Telemetría del Dispositivo
+                </h2>
+                <span className="text-[11px] font-mono px-2.5 py-1 rounded-full bg-slate-800 text-cyan-300 border border-slate-700">
+                  simulacionQUS.json
                 </span>
               </div>
-            </div>
-          </div>
 
-          <div className="mt-6 flex flex-wrap items-center gap-3">
-            <button
-              type="button"
-              disabled={escaneando}
-              onClick={ejecutarEscaneo}
-              className="bg-[#10b981] hover:bg-[#34d399] active:bg-[#059669] text-[#062018] font-bold px-5 py-2.5 rounded-xl text-xs sm:text-sm cursor-pointer shadow-lg shadow-emerald-500/20 disabled:opacity-50"
-            >
-              {escaneando ? 'Transmitiendo ultrasonido...' : '⚡ Iniciar Escaneo QUS de Talón'}
-            </button>
+              <p className="text-xs text-slate-400 mb-5 leading-relaxed">
+                Datos capturados por el sensor QUS del rover lunar listos para transmitir a la API de BioAstro:
+              </p>
 
-            {onVolver && (
+              {/* Tarjetas resumen de métricas del sensor */}
+              <div className="space-y-3 mb-5">
+                <div className="p-3.5 rounded-2xl bg-slate-900/80 border border-slate-800 flex items-center justify-between">
+                  <div>
+                    <span className="text-xs text-slate-400 block">Velocidad del Sonido (SOS)</span>
+                    <span className="text-base font-bold text-white">
+                      {simulacionJSON.metrics.sos_ms} m/s
+                    </span>
+                  </div>
+                  <span className="text-[11px] text-cyan-400 font-mono bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-500/30">
+                    sos_ms
+                  </span>
+                </div>
+
+                <div className="p-3.5 rounded-2xl bg-slate-900/80 border border-slate-800 flex items-center justify-between">
+                  <div>
+                    <span className="text-xs text-slate-400 block">Atenuación Acústica (BUA)</span>
+                    <span className="text-base font-bold text-white">
+                      {simulacionJSON.metrics.bua_db_mhz} dB/MHz
+                    </span>
+                  </div>
+                  <span className="text-[11px] text-cyan-400 font-mono bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-500/30">
+                    bua_db_mhz
+                  </span>
+                </div>
+
+                <div className="p-3.5 rounded-2xl bg-slate-900/80 border border-slate-800 flex items-center justify-between">
+                  <div>
+                    <span className="text-xs text-slate-400 block">Calcio Urinario</span>
+                    <span className="text-base font-bold text-white">
+                      {simulacionJSON.metrics.calcium_urine_mg_dl} mg/dL
+                    </span>
+                  </div>
+                  <span className="text-[11px] text-amber-400 font-mono bg-amber-950/60 px-2 py-0.5 rounded border border-amber-500/30">
+                    calcium_urine
+                  </span>
+                </div>
+
+                <div className="p-3.5 rounded-2xl bg-slate-900/80 border border-slate-800 flex items-center justify-between">
+                  <div>
+                    <span className="text-xs text-slate-400 block">Marcador Resorción (CTX)</span>
+                    <span className="text-base font-bold text-white">
+                      {simulacionJSON.metrics.ctx_ug_mmol} µg/mmol
+                    </span>
+                  </div>
+                  <span className="text-[11px] text-amber-400 font-mono bg-amber-950/60 px-2 py-0.5 rounded border border-amber-500/30">
+                    ctx_ug_mmol
+                  </span>
+                </div>
+              </div>
+
+              {/* Botón para ver el JSON crudo */}
               <button
                 type="button"
-                onClick={onVolver}
-                className="text-xs text-slate-400 hover:text-white underline cursor-pointer ml-auto"
+                onClick={() => setMostrarJSONCrudo((prev) => !prev)}
+                className="text-xs text-cyan-400 hover:text-cyan-300 underline cursor-pointer mb-5 block"
               >
-                ← Volver a Inicio
+                {mostrarJSONCrudo ? 'Ocultar JSON de simulacro' : 'Ver archivo JSON original simulacionQUS.json'}
               </button>
+
+              {mostrarJSONCrudo && (
+                <pre className="p-4 rounded-2xl bg-slate-950 border border-slate-800 text-[11px] font-mono text-emerald-300 overflow-x-auto mb-5">
+                  {JSON.stringify(simulacionJSON, null, 2)}
+                </pre>
+              )}
+            </div>
+
+            {/* BOTÓN PRINCIPAL DE SINCRONIZACIÓN */}
+            <button
+              type="button"
+              disabled={sincronizando}
+              onClick={handleSincronizar}
+              className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-emerald-500 to-[#34d399] hover:from-emerald-400 hover:to-[#4eedb2] active:scale-[0.98] text-[#051c16] font-extrabold text-sm sm:text-base flex items-center justify-center gap-2.5 transition-all cursor-pointer shadow-lg shadow-emerald-500/30 disabled:opacity-50"
+            >
+              <span>{sincronizando ? 'Sincronizando con Backend...' : '⚡ Sincronizar Datos QUS con Backend'}</span>
+              {!sincronizando && <span>→</span>}
+            </button>
+          </div>
+
+          {/* COLUMNA DERECHA (7/12): CUENTAS REALIZADAS POR EL BACKEND */}
+          <div className="lg:col-span-7 bg-[#131d2e] border border-slate-800/90 rounded-3xl p-6 sm:p-7 shadow-2xl flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between pb-4 border-b border-slate-800 mb-6">
+                <div>
+                  <span className="text-xs text-slate-400 font-mono">RESPUESTA DE LA API BACKEND</span>
+                  <h2 className="text-xl font-bold text-white mt-0.5">
+                    Cuentas Clínicas y Guardado en Base de Datos
+                  </h2>
+                </div>
+                {resultadoBackend && (
+                  <span className="px-3 py-1 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-500/30 text-xs font-semibold">
+                    ● Calculado por Node.js
+                  </span>
+                )}
+              </div>
+
+              {!resultadoBackend ? (
+                /* Estado previo a la sincronización */
+                <div className="py-12 px-6 rounded-2xl bg-slate-900/40 border border-slate-800/80 text-center flex flex-col items-center justify-center">
+                  <div className="w-16 h-16 rounded-full bg-slate-800/80 flex items-center justify-center text-3xl mb-4">
+                    📡
+                  </div>
+                  <h3 className="text-base font-bold text-white mb-2">
+                    Esperando sincronización de telemetría
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-400 max-w-md leading-relaxed">
+                    Presiona el botón de la izquierda para enviar el JSON a la API del backend.
+                    El servidor procesará la velocidad y atenuación acústica, calculará el <strong>Stiffness Index (SI)</strong> y el <strong>T-Score</strong>, y guardará el registro en MySQL.
+                  </p>
+                </div>
+              ) : (
+                /* Estado con las cuentas devueltas por el backend */
+                <div className="space-y-6 animate-fadeIn">
+                  
+                  {/* Tarjetas de Cuentas Principales */}
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    
+                    {/* Stiffness Index */}
+                    <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-700/80 shadow-md">
+                      <span className="text-xs text-slate-400 block">Stiffness Index (SI)</span>
+                      <div className="text-3xl font-black text-white font-mono mt-1">
+                        {resultadoBackend.calculos.stiffness_index}
+                      </div>
+                      <span className="text-[11px] text-cyan-400 font-medium block mt-1">
+                        (0.67·BUA + 0.28·SOS - 420)
+                      </span>
+                    </div>
+
+                    {/* T-Score */}
+                    <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-700/80 shadow-md">
+                      <span className="text-xs text-slate-400 block">T-Score Estimado</span>
+                      <div className={`text-3xl font-black font-mono mt-1 ${
+                        resultadoBackend.calculos.t_score < -2.5 ? 'text-amber-400' : 'text-emerald-400'
+                      }`}>
+                        {resultadoBackend.calculos.t_score}
+                      </div>
+                      <span className="text-[11px] text-slate-400 font-medium block mt-1">
+                        (SI - 100) / 15
+                      </span>
+                    </div>
+
+                    {/* Z-Score */}
+                    <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-700/80 shadow-md">
+                      <span className="text-xs text-slate-400 block">Z-Score Ajustado</span>
+                      <div className="text-3xl font-black text-white font-mono mt-1">
+                        {resultadoBackend.calculos.z_score}
+                      </div>
+                      <span className="text-[11px] text-slate-400 font-medium block mt-1">
+                        (SI - 90) / 14
+                      </span>
+                    </div>
+
+                  </div>
+
+                  {/* Diagnóstico y Resorción */}
+                  <div className="p-5 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-3">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                      <span className="text-xs text-slate-400">Diagnóstico preliminar:</span>
+                      <strong className="text-sm text-amber-300 font-semibold">
+                        {resultadoBackend.calculos.clasificacion}
+                      </strong>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-2 border-t border-slate-800">
+                      <span className="text-xs text-slate-400">Tasa de resorción ósea (CTX):</span>
+                      <strong className="text-xs text-amber-400 font-medium font-mono">
+                        {resultadoBackend.calculos.nivel_resorcion}
+                      </strong>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-2 border-t border-slate-800">
+                      <span className="text-xs text-slate-400">Calciuria en orina:</span>
+                      <strong className="text-xs text-slate-200 font-medium font-mono">
+                        {resultadoBackend.calculos.estado_calciuria}
+                      </strong>
+                    </div>
+                  </div>
+
+                  {/* Recomendaciones emitidas por el backend */}
+                  <div className="p-5 rounded-2xl bg-[#09221c] border border-emerald-500/30">
+                    <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider block mb-2">
+                      Prescripciones automáticas calculadas:
+                    </span>
+                    <ul className="space-y-1.5 text-xs text-slate-200">
+                      {resultadoBackend.calculos.recomendaciones.map((rec, i) => (
+                        <li key={i} className="flex items-start gap-2">
+                          <span className="text-emerald-400 font-bold">•</span>
+                          <span>{rec}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Estado de persistencia en MySQL */}
+                  <div className="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center justify-between text-xs font-mono">
+                    <span className="text-slate-400">Base de Datos MySQL (bioastro):</span>
+                    <span className="text-emerald-400 font-semibold">
+                      {resultadoBackend.persistencia?.guardado
+                        ? `✓ Guardado (ID: ${resultadoBackend.persistencia.id_insercion})`
+                        : '✓ Datos validados y listos en backend'}
+                    </span>
+                  </div>
+
+                </div>
+              )}
+            </div>
+
+            {resultadoBackend && (
+              <div className="mt-6 pt-4 border-t border-slate-800 flex justify-end">
+                <button
+                  type="button"
+                  onClick={() => setResultadoBackend(null)}
+                  className="text-xs text-slate-400 hover:text-white underline cursor-pointer"
+                >
+                  Limpiar y realizar nuevo simulacro
+                </button>
+              </div>
             )}
           </div>
+
         </div>
 
-        {/* Panel lateral con checkboxes interactivos */}
-        <div className="bg-[#131d2e] border border-slate-700/80 rounded-3xl p-6 shadow-xl flex flex-col justify-between">
-          <div>
-            <h3 className="text-base font-bold text-white mb-2">Protocolo de Ultrasonido</h3>
-            <p className="text-xs text-slate-400 mb-6">
-              Control de absorción mecánica y bandas de resistencia
-            </p>
+      </main>
 
-            <div className="space-y-4">
-              <label className="flex items-center gap-2.5 text-xs text-slate-300 hover:text-white cursor-pointer select-none">
-                <input
-                  type="checkbox"
-                  checked={calibracionGel}
-                  onChange={(e) => setCalibracionGel(e.target.checked)}
-                  className="w-4 h-4 rounded border-slate-700 bg-slate-800 text-emerald-500 accent-emerald-500 cursor-pointer"
-                />
-                <span>Acoplamiento acústico (Gel de contacto)</span>
-              </label>
-
-              <label className="flex items-center gap-2.5 text-xs text-slate-300 hover:text-white cursor-pointer select-none">
-                <input
-                  type="checkbox"
-                  checked={analisisCalcaneo}
-                  onChange={(e) => setAnalisisCalcaneo(e.target.checked)}
-                  className="w-4 h-4 rounded border-slate-700 bg-slate-800 text-emerald-500 accent-emerald-500 cursor-pointer"
-                />
-                <span>Cálculo de índice de rigidez (Stiffness Index)</span>
-              </label>
-
-              <label className="flex items-center gap-2.5 text-xs text-slate-300 hover:text-white cursor-pointer select-none">
-                <input
-                  type="checkbox"
-                  checked={seguimientoHistorico}
-                  onChange={(e) => setSeguimientoHistorico(e.target.checked)}
-                  className="w-4 h-4 rounded border-slate-700 bg-slate-800 text-emerald-500 accent-emerald-500 cursor-pointer"
-                />
-                <span>Sincronizar telemetría ósea con NASA / ESA</span>
-              </label>
-
-              <label className="flex items-center gap-2.5 text-xs text-slate-300 hover:text-white cursor-pointer select-none">
-                <input
-                  type="checkbox"
-                  checked={alertaImpacto}
-                  onChange={(e) => setAlertaImpacto(e.target.checked)}
-                  className="w-4 h-4 rounded border-slate-700 bg-slate-800 text-amber-500 accent-amber-500 cursor-pointer"
-                />
-                <span>Exigir 20 min de marcha con bandas elásticas</span>
-              </label>
-            </div>
-
-            <div className="mt-8 p-4 rounded-2xl bg-[#09221c] border border-emerald-500/30 text-xs text-slate-300">
-              <span className="font-bold text-emerald-400 block mb-1">Prescripción de Ejercicio:</span>
-              El impacto mecánico al caminar en la Luna (1/6 G) no basta por sí solo para mantener la densidad trabecular. Realizar saltos controlados contra arnés reactivo.
-            </div>
-          </div>
+      {/* 3. FOOTER */}
+      <footer className="px-6 sm:px-10 py-5 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400 bg-[#0a0f1c]/70">
+        <div>
+          <span>API Endpoint: </span>
+          <code className="text-cyan-300 font-mono">POST /api/qus/sincronizar</code>
         </div>
+        <div className="italic text-slate-400">
+          Respira. Tu ritmo también importa.
+        </div>
+      </footer>
 
-      </div>
     </div>
   );
 }
-

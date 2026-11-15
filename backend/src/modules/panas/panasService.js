@@ -1,6 +1,6 @@
 
-const ITEMS_PA = [1, 3, 5, 9, 10, 12, 14, 16, 17, 19];
-const ITEMS_NA = [2, 4, 6, 7, 8, 11, 13, 15, 18, 20];
+const ITEMS_PA = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+const ITEMS_NA = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20];
 
 export function calcularPANAS(respuestas) {
 

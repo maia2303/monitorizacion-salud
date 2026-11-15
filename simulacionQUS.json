@@ -1,0 +1,14 @@
+{
+  "astronaut_id": "AST-01",
+  "astronaut_name": "Cmdte. Alex Vega",
+  "mission_day": 42,
+  "device_id": "QUS-ROVER-04",
+  "timestamp": "2026-11-15T14:30:00Z",
+  "metrics": {
+    "sos_ms": 1518,
+    "bua_db_mhz": 71.5,
+    "calcium_urine_mg_dl": 24.5,
+    "ctx_ug_mmol": 465
+  }
+}
+

@@ -94,3 +94,92 @@ export function validarSueno(datos) {
     capacidadRover
   };
 }
+
+const PENALIZACION_LATENCIA = {
+  MENOS_15: 0,
+  '15_30': 5,
+  '30_60': 15,
+  MAS_60: 25
+};
+
+const PENALIZACION_DESPERTAR = {
+  BIEN: 0,
+  REGULAR: 12,
+  CANSADO: 25
+};
+
+const PENALIZACION_INTERRUPCION = {
+  RUIDO: 3,
+  TEMPERATURA: 3,
+  MENTE_ACTIVA: 5,
+  OTRO: 2
+};
+
+export function calcularPuntajeSueno(datos) {
+  const respuestas = validarSueno(datos);
+
+  const {
+    latenciaSueno,
+    cantidadDespertares,
+    despiertoMas30Min,
+    calidadDespertar,
+    interrupciones,
+    capacidadRover
+  } = respuestas;
+
+  const latencia = PENALIZACION_LATENCIA[latenciaSueno];
+
+  const despertares = Math.min(
+    cantidadDespertares * 6,
+    25
+  );
+
+  const despertarProlongado =
+    despiertoMas30Min ? 15 : 0;
+
+  const calidad =
+    PENALIZACION_DESPERTAR[calidadDespertar];
+
+  const causas = Math.min(
+    interrupciones.reduce(
+      (total, causa) =>
+        total + PENALIZACION_INTERRUPCION[causa],
+      0
+    ),
+    10
+  );
+
+  const totalPenalizaciones =
+    latencia +
+    despertares +
+    despertarProlongado +
+    calidad +
+    causas;
+
+  const puntajeSueno = Math.max(
+    0,
+    Math.min(100, 100 - totalPenalizaciones)
+  );
+
+  const nivelDescanso =
+    puntajeSueno >= 80 ? 'ALTO' :
+    puntajeSueno >= 60 ? 'MODERADO' : 'BAJO';
+
+  return {
+    ...respuestas,
+    puntajeSueno,
+    nivelDescanso,
+    discordanciaSubjetiva:
+      puntajeSueno < 60 &&
+      capacidadRover === 'OPTIMA',
+    desglosePenalizaciones: {
+      latencia,
+      despertares,
+      despertarProlongado,
+      calidad,
+      interrupciones: causas
+    },
+    tipoIndice: 'EXPERIMENTAL_BIOASTRO'
+  };
+}
+

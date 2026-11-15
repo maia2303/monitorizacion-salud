@@ -117,13 +117,21 @@ export default function ControlOrina({ onVolver, onCambiarPestana }) {
         </div>
 
         {/* Pestañas de navegación */}
-        <nav className="flex items-center gap-2">
+        <nav className="flex flex-wrap items-center gap-2">
           <button
             type="button"
             onClick={() => onCambiarPestana ? onCambiarPestana('inicio') : onVolver && onVolver()}
             className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
           >
             Inicio
+          </button>
+
+          <button
+            type="button"
+            onClick={() => onCambiarPestana && onCambiarPestana('tests')}
+            className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors cursor-pointer select-none"
+          >
+            Bienestar y Tests
           </button>
           
           <button

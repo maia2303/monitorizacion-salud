@@ -3,6 +3,7 @@ import { GraceAvatar, RockyAvatar } from './AstronautAvatars';
 
 const PESTAÑAS = [
   { id: 'inicio', label: 'Inicio', icon: '🚀' },
+  { id: 'tests', label: 'Bienestar y Tests', icon: '🧠' },
   { id: 'test_orina', label: 'Test Orina', icon: '🧪' },
   { id: 'test_pvc', label: 'Test PVC', icon: '🫀' },
   { id: 'test_qus', label: 'Test QUS', icon: '🦴' },

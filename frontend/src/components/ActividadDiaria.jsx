@@ -66,12 +66,20 @@ export default function ActividadDiaria({
         </div>
 
         {/* Pestañas de navegación superiores */}
-        <nav className="flex items-center gap-2">
+        <nav className="flex flex-wrap items-center gap-2">
           <button
             type="button"
             className="px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold tracking-wide bg-[#0d342f] text-[#34d399] border border-emerald-500/30 shadow-[0_0_15px_rgba(52,211,153,0.15)] cursor-pointer select-none"
           >
             Inicio
+          </button>
+
+          <button
+            type="button"
+            onClick={() => onCambiarPestana && onCambiarPestana('tests')}
+            className="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium tracking-wide text-cyan-300 bg-cyan-950/40 border border-cyan-500/30 hover:bg-cyan-900/50 transition-colors cursor-pointer select-none"
+          >
+            Bienestar y Tests
           </button>
           
           <button
@@ -369,6 +377,25 @@ export default function ActividadDiaria({
                   {getMensajeCuidado()}
                 </p>
               </div>
+            </div>
+
+            {/* ACCESO RÁPIDO A EVALUACIONES DE BIENESTAR (PANAS Y SUEÑO) */}
+            <div className="bg-[#131d2e] border border-emerald-500/30 rounded-3xl p-6 sm:p-7 shadow-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div>
+                <span className="text-[#2ee59d] text-xs font-bold tracking-wider uppercase block">
+                  BIENESTAR Y EVALUACIÓN
+                </span>
+                <p className="text-slate-200 text-sm sm:text-base font-medium mt-1">
+                  Registrá tu estado emocional (PANAS) y la calidad de tu descanso pre-rover.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => onCambiarPestana && onCambiarPestana('tests')}
+                className="bg-[#2ee59d] hover:bg-[#3df2aa] text-[#062018] font-bold text-xs sm:text-sm py-3 px-6 rounded-full shadow-[0_0_20px_rgba(46,229,157,0.25)] transition-all cursor-pointer whitespace-nowrap"
+              >
+                Ir a Evaluaciones →
+              </button>
             </div>
 
           </div>
